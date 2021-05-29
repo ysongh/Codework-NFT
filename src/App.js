@@ -1,13 +1,13 @@
 import React from 'react';
 
 import './App.css';
-import Form from './pages/Form';
+import AddForm from './pages/AddForm';
 
 function App() {
   return (
     <div className="App">
       <h1>Codework NFT</h1>
-      <Form />
+      <AddForm />
     </div>
   );
 }
