@@ -4,10 +4,10 @@ import Web3 from 'web3';
 import './App.css';
 import CodeworkNFT from './abis/CodeworkNFT.json';
 import AddForm from './pages/AddForm';
+import CodeWorks from './pages/CodeWorks';
 
 function App() {
   const [account, setAccount] = useState('');
-  const [totalSupply, setTotalSupply] = useState(0);
   const [codeworkNFTBlockchain, setCodeworkNFTBlockchain] = useState(null);
 
   const loadBlockchain = async () => {
@@ -33,9 +33,6 @@ function App() {
     if(netId){
       const codeworkNFT = new web3.eth.Contract(CodeworkNFT.abi, CodeworkNFT.networks[netId].address);
       setCodeworkNFTBlockchain(codeworkNFT);
-
-      const totalSupply = await codeworkNFT.methods.totalSupply().call();
-      setTotalSupply(totalSupply);
     }
     else{
       window.alert('Contract is not deployed to detected network')
@@ -46,11 +43,11 @@ function App() {
     <div className="App">
       <h1>Codework NFT</h1>
       <p>{account}</p>
-      <p>{totalSupply}</p>
       <button onClick={loadBlockchain}>Open Wallet</button>
       <AddForm
         walletAddress={account}
         codeworkNFTBlockchain={codeworkNFTBlockchain} />
+      <CodeWorks codeworkNFTBlockchain={codeworkNFTBlockchain} />
     </div>
   );
 }
