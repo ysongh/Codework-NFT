@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { NFTStorage, File } from 'nft.storage';
 import { Container, Card, Form, Button } from 'semantic-ui-react';
 
@@ -7,6 +8,7 @@ const apiKey = NFTStorageAPIKey;
 const client = new NFTStorage({ token: apiKey })
 
 function AddForm({ walletAddress, codeworkNFTBlockchain}) {
+  const history = useHistory();
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState('');
@@ -36,6 +38,7 @@ function AddForm({ walletAddress, codeworkNFTBlockchain}) {
       .send({ from: walletAddress });
 
     console.log(event);
+    history.push('/');
   }
   return (
     <Container>

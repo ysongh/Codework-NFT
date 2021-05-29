@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Web3 from 'web3';
 
 import './App.css';
 import CodeworkNFT from './abis/CodeworkNFT.json';
+import Navbar from './components/Navbar';
 import AddForm from './pages/AddForm';
 import CodeWorks from './pages/CodeWorks';
 
@@ -11,6 +13,7 @@ function App() {
   const [codeworkNFTBlockchain, setCodeworkNFTBlockchain] = useState(null);
 
   const loadBlockchain = async () => {
+    console.log("f")
     if (window.ethereum) {
       window.web3 = new Web3(window.ethereum);
 
@@ -40,15 +43,21 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <h1>Codework NFT</h1>
-      <p>{account}</p>
-      <button onClick={loadBlockchain}>Open Wallet</button>
-      <AddForm
-        walletAddress={account}
-        codeworkNFTBlockchain={codeworkNFTBlockchain} />
-      <CodeWorks codeworkNFTBlockchain={codeworkNFTBlockchain} />
-    </div>
+    <Router className="App">
+      <Navbar
+        loadBlockchain={loadBlockchain}
+        walletAddress={account}/>
+      <Switch>
+        <Route path="/addform">
+          <AddForm
+            walletAddress={account}
+            codeworkNFTBlockchain={codeworkNFTBlockchain} />
+        </Route>
+        <Route path="/">
+          <CodeWorks codeworkNFTBlockchain={codeworkNFTBlockchain} />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
