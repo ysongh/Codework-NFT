@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+import { Container, Grid, Card, Button } from 'semantic-ui-react';
+
 function CodeWorks({ codeworkNFTBlockchain }) {
   const [works, setWorks] = useState([]);
 
@@ -8,9 +10,13 @@ function CodeWorks({ codeworkNFTBlockchain }) {
       const totalSupply = await codeworkNFTBlockchain.methods.totalSupply().call();
       const temp = [];
       for (let i = 1; i <= totalSupply; i++) {
-        const metadataURL = await codeworkNFTBlockchain.methods.tokenURI(i).call();
-        temp.push(metadataURL);
-        console.log(metadataURL);
+        let metadataURL = await codeworkNFTBlockchain.methods.tokenURI(i).call();
+        metadataURL = metadataURL.split("://");
+        let data = await fetch('https://ipfs.io/ipfs/' + metadataURL[1]);
+        data = await data.json();
+        data.id = metadataURL[1];
+        console.log(data);
+        temp.push(data);
       }
       setWorks(temp);
     }
@@ -18,10 +24,36 @@ function CodeWorks({ codeworkNFTBlockchain }) {
     if (codeworkNFTBlockchain) loadWorks();
   }, [codeworkNFTBlockchain])
 
+  const getImage = ipfsURL => {
+    ipfsURL = ipfsURL.split("://");
+    return 'https://ipfs.io/ipfs/' + ipfsURL[1];
+  }
+
   return (
-    <div>
-      {works.map(work => <p>{work}</p>)}
-    </div>
+    <Container>
+      <Grid columns={4}>
+        <Grid.Row>
+          {works.map(work => (
+            <Grid.Column key={work.id} style={{marginBottom: '1rem'}}>
+              <Card color='orange'>
+                <img src={getImage(work.image)} alt="Work" />
+                <Card.Content>
+                  <Card.Header>{work.name}</Card.Header>
+                  <Card.Description>
+                    {work.description}
+                  </Card.Description>
+                  <div style={{marginTop: '.7rem'}}>
+                    <Button basic color='green'>
+                      View
+                    </Button>
+                  </div>
+                </Card.Content>
+              </Card>
+            </Grid.Column>
+          ))}
+        </Grid.Row>
+      </Grid>
+    </Container>
   )
 }
 
