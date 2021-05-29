@@ -6,7 +6,7 @@ import { NFTStorageAPIKey } from '../config';
 const apiKey = NFTStorageAPIKey;
 const client = new NFTStorage({ token: apiKey })
 
-function AddForm() {
+function AddForm({ walletAddress, codeworkNFTBlockchain}) {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState('');
@@ -30,8 +30,13 @@ function AddForm() {
     })
     console.log(metadata.url);
     setMetadataURL(metadata.url);
-  }
 
+    const event = await codeworkNFTBlockchain.methods
+      .mintCodeworkNFT(metadata.url)
+      .send({ from: walletAddress });
+
+    console.log(event);
+  }
   return (
     <Container>
       <Card centered style={{ width: '600px'}} color='purple'>
