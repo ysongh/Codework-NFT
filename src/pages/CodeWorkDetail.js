@@ -52,7 +52,10 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
 
       <CodeModal
         open={open}
-        setOpen={setOpen} />
+        setOpen={setOpen}
+        id={id}
+        walletAddress={walletAddress}
+        codeworkNFTBlockchain={codeworkNFTBlockchain} />
     </Container>
   )
 }
