@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+import { Link } from 'react-router-dom';
 import { Container, Grid, Card, Button } from 'semantic-ui-react';
 
 function CodeWorks({ codeworkNFTBlockchain }) {
@@ -24,11 +24,6 @@ function CodeWorks({ codeworkNFTBlockchain }) {
     if (codeworkNFTBlockchain) loadWorks();
   }, [codeworkNFTBlockchain])
 
-  const getImage = ipfsURL => {
-    ipfsURL = ipfsURL.split("://");
-    return 'https://ipfs.io/ipfs/' + ipfsURL[1];
-  }
-
   return (
     <Container>
       <Grid columns={4}>
@@ -36,14 +31,13 @@ function CodeWorks({ codeworkNFTBlockchain }) {
           {works.map(work => (
             <Grid.Column key={work.id} style={{marginBottom: '1rem'}}>
               <Card color='orange'>
-                <img src={getImage(work.image)} alt="Work" />
                 <Card.Content>
                   <Card.Header>{work.name}</Card.Header>
                   <Card.Description>
                     {work.description}
                   </Card.Description>
                   <div style={{marginTop: '.7rem'}}>
-                    <Button basic color='green'>
+                    <Button basic color='green' as={Link} to={`/works/${work.id}`}>
                       View
                     </Button>
                   </div>

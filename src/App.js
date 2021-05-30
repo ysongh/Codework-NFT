@@ -7,13 +7,13 @@ import CodeworkNFT from './abis/CodeworkNFT.json';
 import Navbar from './components/Navbar';
 import AddForm from './pages/AddForm';
 import CodeWorks from './pages/CodeWorks';
+import CodeWorkDetail from './pages/CodeWorkDetail';
 
 function App() {
   const [account, setAccount] = useState('');
   const [codeworkNFTBlockchain, setCodeworkNFTBlockchain] = useState(null);
 
   const loadBlockchain = async () => {
-    console.log("f")
     if (window.ethereum) {
       window.web3 = new Web3(window.ethereum);
 
@@ -50,6 +50,11 @@ function App() {
       <Switch>
         <Route path="/addform">
           <AddForm
+            walletAddress={account}
+            codeworkNFTBlockchain={codeworkNFTBlockchain} />
+        </Route>
+        <Route path="/works/:cid">
+          <CodeWorkDetail
             walletAddress={account}
             codeworkNFTBlockchain={codeworkNFTBlockchain} />
         </Route>
