@@ -7,6 +7,7 @@ import CodeModal from '../components/CodeModal';
 function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
   const { cid, id } = useParams();
   const [work, setWork] = useState({});
+  const [userWork, setUserWork] = useState({});
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -21,6 +22,7 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
     const getUserWork = async () => {
       const code = await codeworkNFTBlockchain.methods.codeworkList(id).call();
       console.log(code);
+      setUserWork(code);
     }
 
     if(cid) getWork();
@@ -50,6 +52,35 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
         </Card.Content>
       </Card>
 
+      <h2>Submission</h2>
+
+      {userWork.from !== '0x0000000000000000000000000000000000000000' && (
+        <Card color='orange'>
+          <Card.Content>
+            <Card.Header>{userWork.price} ETH</Card.Header>
+            <Card.Description>
+              {userWork.from}
+            </Card.Description>
+          </Card.Content>
+          <Card.Content extra>
+            <div className='ui two buttons'>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href={"https://storageapi.fleek.co/ysongh-69207-team-bucket/" + userWork.codeURL}
+                >
+                  <Button basic color='green'>
+                    See Work
+                  </Button>
+              </a>
+              
+              <Button basic color='red'>
+                Pay and get code
+              </Button>
+            </div>
+          </Card.Content>
+        </Card>
+      )}
       <CodeModal
         open={open}
         setOpen={setOpen}
