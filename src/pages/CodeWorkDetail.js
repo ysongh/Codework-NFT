@@ -46,7 +46,7 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
           <br />
           <img src={getImage(work.image)} alt="Work" style={{width: '50%'}} />
           <br />
-          <Button color="black" onClick={() => setOpen(true)}>
+          <Button color="violet" onClick={() => setOpen(true)}>
             Add your code
           </Button>
         </Card.Content>
@@ -69,12 +69,12 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
                 rel="noopener noreferrer"
                 href={"https://storageapi.fleek.co/ysongh-69207-team-bucket/" + userWork.codeURL}
                 >
-                  <Button basic color='green'>
+                  <Button basic color='violet'>
                     See Work
                   </Button>
               </a>
               
-              <Button basic color='red'>
+              <Button basic color='teal'>
                 Pay and get code
               </Button>
             </div>

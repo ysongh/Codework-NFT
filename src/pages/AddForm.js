@@ -64,7 +64,7 @@ function AddForm({ walletAddress, codeworkNFTBlockchain}) {
             <Form.TextArea label='Description' value={description} onChange={(e) => setDescription(e.target.value)} />
             <Button
               type='submit'
-              color="blue"
+              color="violet"
               onClick={upload}
             >Create</Button>
             {loading && <Spinner text="Creating..." />}

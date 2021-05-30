@@ -4,12 +4,13 @@ import { Container, Menu, Button } from 'semantic-ui-react';
 
 function Navbar({ loadBlockchain, walletAddress }) {
   return (
-    <Menu color="blue" inverted pointing>
+    <Menu color="violet" inverted pointing>
       <Container>
+        <img src='/logo.png' style={{ width: '10rem'}} />
         <Menu.Item
           as={Link}
           to="/"
-          name='Codework NFT'
+          name='Home'
         />
         <Menu.Item
           as={Link}
@@ -22,13 +23,13 @@ function Navbar({ loadBlockchain, walletAddress }) {
               <p>{walletAddress.substring(0,8)}...{walletAddress.substring(34,42)}</p>
             </Menu.Item>
             <Menu.Item>
-              <Button secondary>Disconnect</Button>
+              <Button color="red">Disconnect</Button>
             </Menu.Item>
           </Menu.Menu>
         ) : (
           <Menu.Menu position='right'>
             <Menu.Item>
-              <Button color='green' onClick={loadBlockchain}>Open Wallet</Button>
+              <Button color='teal' onClick={loadBlockchain}>Open Wallet</Button>
             </Menu.Item>
           </Menu.Menu>
         )}
