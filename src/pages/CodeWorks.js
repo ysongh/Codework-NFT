@@ -28,7 +28,7 @@ function CodeWorks({ codeworkNFTBlockchain }) {
   return (
     <Container>
       <h1>List of Bounties</h1>
-      <Grid columns={4}>
+      <Grid columns={3}>
         <Grid.Row>
           {works.map((work, index) => (
             <Grid.Column key={work.id} style={{marginBottom: '1rem'}}>
