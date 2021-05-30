@@ -53,7 +53,7 @@ function App() {
             walletAddress={account}
             codeworkNFTBlockchain={codeworkNFTBlockchain} />
         </Route>
-        <Route path="/works/:cid">
+        <Route path="/works/:cid/:id">
           <CodeWorkDetail
             walletAddress={account}
             codeworkNFTBlockchain={codeworkNFTBlockchain} />

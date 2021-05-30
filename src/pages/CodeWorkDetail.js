@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Container, Card } from 'semantic-ui-react';
+import { Container, Card, Button } from 'semantic-ui-react';
 
-function CodeWorkDetail() {
-  const { cid } = useParams();
+import CodeModal from '../components/CodeModal';
+
+function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
+  const { cid, id } = useParams();
   const [work, setWork] = useState({});
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const getWork = async () => {
@@ -15,8 +18,14 @@ function CodeWorkDetail() {
       setWork(data);
     }
 
+    const getUserWork = async () => {
+      const code = await codeworkNFTBlockchain.methods.codeworkList(id).call();
+      console.log(code);
+    }
+
     if(cid) getWork();
-  }, [cid]);
+    if(codeworkNFTBlockchain) getUserWork();
+  }, [cid, id, codeworkNFTBlockchain]);
 
   const getImage = ipfsURL => {
     if(!ipfsURL) return;
@@ -34,8 +43,16 @@ function CodeWorkDetail() {
           </Card.Description>
           <br />
           <img src={getImage(work.image)} alt="Work" style={{width: '50%'}} />
+          <br />
+          <Button color="black" onClick={() => setOpen(true)}>
+            Add your code
+          </Button>
         </Card.Content>
       </Card>
+
+      <CodeModal
+        open={open}
+        setOpen={setOpen} />
     </Container>
   )
 }

@@ -15,6 +15,7 @@ function CodeWorks({ codeworkNFTBlockchain }) {
         let data = await fetch('https://ipfs.io/ipfs/' + metadataURL[1]);
         data = await data.json();
         data.id = metadataURL[1];
+        data.cid = metadataURL[1].slice(0, 59);
         console.log(data);
         temp.push(data);
       }
@@ -28,7 +29,7 @@ function CodeWorks({ codeworkNFTBlockchain }) {
     <Container>
       <Grid columns={4}>
         <Grid.Row>
-          {works.map(work => (
+          {works.map((work, index) => (
             <Grid.Column key={work.id} style={{marginBottom: '1rem'}}>
               <Card color='orange'>
                 <Card.Content>
@@ -37,7 +38,7 @@ function CodeWorks({ codeworkNFTBlockchain }) {
                     {work.description}
                   </Card.Description>
                   <div style={{marginTop: '.7rem'}}>
-                    <Button basic color='green' as={Link} to={`/works/${work.id}`}>
+                    <Button basic color='green' as={Link} to={`/works/${work.cid}/${index}`}>
                       View
                     </Button>
                   </div>
