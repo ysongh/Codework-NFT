@@ -4,6 +4,7 @@ import { NFTStorage, File } from 'nft.storage';
 import { Container, Card, Form, Button } from 'semantic-ui-react';
 
 import { NFTStorageAPIKey } from '../config';
+import Spinner from '../components/Spinner';
 const apiKey = NFTStorageAPIKey;
 const client = new NFTStorage({ token: apiKey })
 
@@ -15,6 +16,7 @@ function AddForm({ walletAddress, codeworkNFTBlockchain}) {
   const [imageName, setImageName] = useState('');
   const [imageType, setImageType] = useState('');
   const [metadataURL, setMetadataURL] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const getImage = event => {
     const file = event.target.files[0];
@@ -25,20 +27,26 @@ function AddForm({ walletAddress, codeworkNFTBlockchain}) {
   }
 
   const upload = async () => {
-    const metadata = await client.store({
-      name: name,
-      description: description,
-      image: new File([image], imageName, { type: imageType })
-    })
-    console.log(metadata.url);
-    setMetadataURL(metadata.url);
+    try{
+      setLoading(true);
+      const metadata = await client.store({
+        name: name,
+        description: description,
+        image: new File([image], imageName, { type: imageType })
+      })
+      console.log(metadata.url);
+      setMetadataURL(metadata.url);
 
-    const event = await codeworkNFTBlockchain.methods
-      .mintCodeworkNFT(metadata.url)
-      .send({ from: walletAddress });
+      const event = await codeworkNFTBlockchain.methods
+        .mintCodeworkNFT(metadata.url)
+        .send({ from: walletAddress });
 
-    console.log(event);
-    history.push('/');
+      console.log(event);
+      history.push('/');
+    } catch(err) {
+      console.error(err);
+      setLoading(false);
+    }
   }
   return (
     <Container>
@@ -59,6 +67,7 @@ function AddForm({ walletAddress, codeworkNFTBlockchain}) {
               color="blue"
               onClick={upload}
             >Create</Button>
+            {loading && <Spinner text="Creating..." />}
           </Form>
         </Card.Content>
       </Card>
