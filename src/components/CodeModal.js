@@ -58,7 +58,7 @@ function CodeModal({ open, setOpen, id, walletAddress, codeworkNFTBlockchain }) 
             <input value={price} onChange={(e) => setPrice(e.target.value)} />
           </Form.Field>
           <Form.Field>
-            <label>Image URL</label>
+            <label>Code (in html file)</label>
             <input type="file" onChange={getImage} />
           </Form.Field>
         </Form>
