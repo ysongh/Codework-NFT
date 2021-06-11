@@ -46,7 +46,8 @@ function App() {
     <Router className="App">
       <Navbar
         loadBlockchain={loadBlockchain}
-        walletAddress={account}/>
+        walletAddress={account}
+        setAccount={setAccount} />
       <Switch>
         <Route path="/addform">
           <AddForm

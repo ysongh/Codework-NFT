@@ -2,11 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Menu, Button } from 'semantic-ui-react';
 
-function Navbar({ loadBlockchain, walletAddress }) {
+function Navbar({ loadBlockchain, walletAddress, setAccount }) {
   return (
     <Menu color="violet" inverted pointing>
       <Container>
-        <img src='/logo.png' style={{ width: '10rem'}} />
+        <img src='/logo.png' style={{ width: '10rem'}} alt="Logo" />
         <Menu.Item
           as={Link}
           to="/"
@@ -23,7 +23,7 @@ function Navbar({ loadBlockchain, walletAddress }) {
               <p>{walletAddress.substring(0,8)}...{walletAddress.substring(34,42)}</p>
             </Menu.Item>
             <Menu.Item>
-              <Button color="red">Disconnect</Button>
+              <Button color="red" onClick={() => setAccount('')}>Disconnect</Button>
             </Menu.Item>
           </Menu.Menu>
         ) : (
