@@ -2,7 +2,17 @@ pragma solidity ^0.6.12;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 contract CodeworkNFT is ERC721 {
+  uint public worksCount = 0;
+  mapping(uint => Works) public workList;
   mapping(uint => CodeWork) public codeworkList;
+
+  struct Works {
+    uint workId;
+    string metadataURL;
+    uint date;
+    bool isCompleted;
+    address payable from;
+  }
 
   struct CodeWork {
     uint tokenId;
@@ -11,6 +21,13 @@ contract CodeworkNFT is ERC721 {
     uint price;
     address payable from;
   }
+
+  event WorkCreated (
+    uint workId,
+    string metadataURL,
+    uint date,
+    address payable from
+  );
 
   event CodeWorkSubmit (
     uint tokenId,
@@ -28,6 +45,13 @@ contract CodeworkNFT is ERC721 {
   );
 
   constructor() ERC721("Codework NFT", "CWN")  public {}
+
+  function createWork(string memory _metadataURL) external {
+      worksCount++;
+
+      workList[worksCount] = Works(worksCount, _metadataURL, now, false, msg.sender);
+      emit WorkCreated(worksCount, _metadataURL, now, msg.sender);
+    }
 
   function mintCodeworkNFT(string memory _metadataURL) external {
     uint _tokenId = totalSupply().add(1);

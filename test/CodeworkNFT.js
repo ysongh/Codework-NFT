@@ -26,14 +26,13 @@ contract('Codework NFT', ([deployer, account1, account2]) => {
     const metadataURL = "hi2h99shji2jhr3oi2";
 
     before(async() => {
-        result = await contract.mintCodeworkNFT(metadataURL, { from: account1 });
-        worksCount = await contract.totalSupply();
+        result = await contract.createWork(metadataURL, { from: account1 });
+        worksCount = await contract.worksCount();
     });
 
     it('create work', async() => {
-        const event = result.logs[1].args;
-        console.log(event)
-        assert.equal(event.tokenId.toNumber(), worksCount, 'Id is correct');
+        const event = result.logs[0].args;
+        assert.equal(event.workId.toNumber(), worksCount, 'Id is correct');
         assert.equal(event.metadataURL, metadataURL, 'Metadata URL is correct');
         assert.equal(event.from, account1, 'Owner address is correct');
     });
