@@ -68,12 +68,11 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 href={"https://storageapi.fleek.co/ysongh-69207-team-bucket/" + userWork.codeURL}
-                >
-                  <Button basic color='violet'>
-                    See Work
-                  </Button>
+              >
+                <Button basic color='violet'>
+                  See Work
+                </Button>
               </a>
-              
               <Button basic color='teal'>
                 Pay and get code
               </Button>
