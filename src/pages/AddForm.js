@@ -38,7 +38,7 @@ function AddForm({ walletAddress, codeworkNFTBlockchain}) {
       setMetadataURL(metadata.url);
 
       const event = await codeworkNFTBlockchain.methods
-        .mintCodeworkNFT(metadata.url)
+        .createWork(metadata.url)
         .send({ from: walletAddress });
 
       console.log(event);

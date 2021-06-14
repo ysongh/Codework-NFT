@@ -7,15 +7,15 @@ function CodeWorks({ codeworkNFTBlockchain }) {
 
   useEffect(() => {
     const loadWorks = async () => {
-      const totalSupply = await codeworkNFTBlockchain.methods.totalSupply().call();
+      const worksCount = await codeworkNFTBlockchain.methods.worksCount().call();
       const temp = [];
-      for (let i = 1; i <= totalSupply; i++) {
-        let metadataURL = await codeworkNFTBlockchain.methods.tokenURI(i).call();
-        metadataURL = metadataURL.split("://");
-        let data = await fetch('https://ipfs.io/ipfs/' + metadataURL[1]);
+      for (let i = 1; i <= worksCount; i++) {
+        const work = await codeworkNFTBlockchain.methods.workList(i).call();
+        work.metadataURL = work.metadataURL.split("://");
+        let data = await fetch('https://ipfs.io/ipfs/' + work.metadataURL[1]);
         data = await data.json();
-        data.id = metadataURL[1];
-        data.cid = metadataURL[1].slice(0, 59);
+        data.id = work.metadataURL[1];
+        data.cid = work.metadataURL[1].slice(0, 59);
         console.log(data);
         temp.push(data);
       }
