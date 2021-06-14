@@ -7,16 +7,22 @@ import CodeModal from '../components/CodeModal';
 function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
   const { cid, id } = useParams();
   const [work, setWork] = useState({});
+  const [metadata, setMetadata] = useState({});
   const [userWork, setUserWork] = useState({});
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const getWork = async () => {
-      console.log(cid)
+      const data = await codeworkNFTBlockchain.methods.workList(id).call();
+      console.log(data);
+      setWork(data);
+    }
+
+    const getMetadata = async () => {
       let data = await fetch(`https://ipfs.io/ipfs/${cid}/metadata.json`);
       data = await data.json();
       console.log(data);
-      setWork(data);
+      setMetadata(data);
     }
 
     const getUserWork = async () => {
@@ -25,8 +31,11 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
       setUserWork(code);
     }
 
-    if(cid) getWork();
-    if(codeworkNFTBlockchain) getUserWork();
+    if(cid) getMetadata();
+    if(codeworkNFTBlockchain){
+      getWork();
+      getUserWork();
+    }
   }, [cid, id, codeworkNFTBlockchain]);
 
   const getImage = ipfsURL => {
@@ -39,12 +48,15 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
     <Container>
       <Card color='orange' fluid>
         <Card.Content>
-          <Card.Header>{work.name}</Card.Header>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <h2>{metadata.name}</h2>
+            <p>{work.date}</p>
+          </div>
           <Card.Description>
-            {work.description}
+            {metadata.description}
           </Card.Description>
           <br />
-          <img src={getImage(work.image)} alt="Work" style={{width: '50%'}} />
+          <img src={getImage(metadata.image)} alt="Design" style={{width: '50%'}} />
           <br />
           <Button color="violet" onClick={() => setOpen(true)}>
             Add your code
