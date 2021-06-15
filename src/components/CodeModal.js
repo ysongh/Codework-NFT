@@ -5,7 +5,7 @@ import fleekStorage from '@fleekhq/fleek-storage-js'
 import { fleekAPIKey, fleekAPISecret } from '../config';
 import Spinner from '../components/Spinner';
 
-function CodeModal({ open, setOpen, id, walletAddress, codeworkNFTBlockchain }) {
+function CodeModal({ open, setOpen, id, walletAddress, codeworkNFTBlockchain, userWorks, setUserWorks }) {
   const [price, setPrice] = useState('');
   const [image, setImage] = useState('');
   const [imageName, setImageName] = useState('');
@@ -34,6 +34,9 @@ function CodeModal({ open, setOpen, id, walletAddress, codeworkNFTBlockchain }) 
         .send({ from: walletAddress });
     
       console.log(event);
+      let temp = userWorks;
+      temp.push(event);
+      setUserWorks(temp);
       setOpen(false)
       setLoading(false);
     } catch(err) {

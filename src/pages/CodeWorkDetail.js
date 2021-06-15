@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Container, Card, Button } from 'semantic-ui-react';
+import { Container, Grid, Card, Button } from 'semantic-ui-react';
 
 import CodeModal from '../components/CodeModal';
 
@@ -8,7 +8,7 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
   const { cid, id } = useParams();
   const [work, setWork] = useState({});
   const [metadata, setMetadata] = useState({});
-  const [userWork, setUserWork] = useState({});
+  const [userWorks, setUserWorks] = useState([]);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -25,16 +25,21 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
       setMetadata(data);
     }
 
-    const getUserWork = async () => {
-      const code = await codeworkNFTBlockchain.methods.codeworkList(id).call();
-      console.log(code);
-      setUserWork(code);
+    const getUserWorks = async () => {
+      const codeCount = await codeworkNFTBlockchain.methods.codeCount().call();
+      const temp = [];
+      for (let i = 1; i <= codeCount; i++) {
+        const code = await codeworkNFTBlockchain.methods.codeworkList(i).call();
+        if(code.workId === id) temp.push(code);
+      }
+      console.log(temp)
+      setUserWorks(temp);
     }
 
     if(cid) getMetadata();
     if(codeworkNFTBlockchain){
       getWork();
-      getUserWork();
+      getUserWorks();
     }
   }, [cid, id, codeworkNFTBlockchain]);
 
@@ -65,39 +70,47 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
       </Card>
 
       <h2>Submission</h2>
-
-      {userWork.from !== '0x0000000000000000000000000000000000000000' && (
-        <Card color='orange'>
-          <Card.Content>
-            <Card.Header>{userWork.price} ETH</Card.Header>
-            <Card.Description>
-              {userWork.from}
-            </Card.Description>
-          </Card.Content>
-          <Card.Content extra>
-            <div className='ui two buttons'>
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href={"https://storageapi.fleek.co/ysongh-69207-team-bucket/" + userWork.codeURL}
-              >
-                <Button basic color='violet'>
-                  See Work
-                </Button>
-              </a>
-              <Button basic color='teal'>
-                Pay and get code
-              </Button>
-            </div>
-          </Card.Content>
-        </Card>
-      )}
+      <Grid columns={3}>
+        <Grid.Row>
+          {userWorks.map(code => (
+            <Grid.Column key={code.codeId} style={{marginBottom: '1rem'}}>
+              <Card color='orange'>
+                <Card.Content>
+                  <Card.Header>{code.price} ETH</Card.Header>
+                  <Card.Description>
+                    {code.from}
+                  </Card.Description>
+                </Card.Content>
+                <Card.Content extra>
+                  <div className='ui two buttons'>
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href={"https://storageapi.fleek.co/ysongh-69207-team-bucket/" + code.codeURL}
+                    >
+                      <Button basic color='violet'>
+                        See Work
+                      </Button>
+                    </a>
+                    <Button basic color='teal'>
+                      Pay and get code
+                    </Button>
+                  </div>
+                </Card.Content>
+              </Card>
+            </Grid.Column>
+          ))}
+        </Grid.Row>
+      </Grid>
+      
       <CodeModal
         open={open}
         setOpen={setOpen}
         id={id}
         walletAddress={walletAddress}
-        codeworkNFTBlockchain={codeworkNFTBlockchain} />
+        codeworkNFTBlockchain={codeworkNFTBlockchain}
+        userWorks={userWorks}
+        setUserWorks={setUserWorks} />
     </Container>
   )
 }
