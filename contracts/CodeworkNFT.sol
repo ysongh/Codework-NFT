@@ -3,6 +3,7 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 contract CodeworkNFT is ERC721 {
   uint public worksCount = 0;
+  uint public codeCount = 0;
   mapping(uint => Works) public workList;
   mapping(uint => CodeWork) public codeworkList;
 
@@ -15,7 +16,8 @@ contract CodeworkNFT is ERC721 {
   }
 
   struct CodeWork {
-    uint tokenId;
+    uint codeId;
+    uint workId;
     string codeURL;
     uint date;
     uint price;
@@ -30,7 +32,8 @@ contract CodeworkNFT is ERC721 {
   );
 
   event CodeWorkSubmit (
-    uint tokenId,
+    uint codeId,
+    uint workId,
     string codeURLs,
     uint date,
     uint price,
@@ -61,8 +64,10 @@ contract CodeworkNFT is ERC721 {
     emit CodeworkCreated(_tokenId, _metadataURL, now, msg.sender);
   }
 
-  function addCodeToWork(uint _tokenId, uint _price, string memory _codeURL) external {
-    codeworkList[_tokenId] = CodeWork(_tokenId, _codeURL, now, _price, msg.sender);
-    emit CodeWorkSubmit(_tokenId, _codeURL, now, _price, msg.sender);
+  function addCodeToWork(uint _workId, uint _price, string memory _codeURL) external {
+    codeCount++;
+
+    codeworkList[codeCount] = CodeWork(codeCount, _workId, _codeURL, now, _price, msg.sender);
+    emit CodeWorkSubmit(codeCount, _workId, _codeURL, now, _price, msg.sender);
   }
 }
