@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Container, Grid, Card, Button } from 'semantic-ui-react';
+import moment from 'moment';
 
 import CodeModal from '../components/CodeModal';
 
@@ -55,7 +56,7 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
         <Card.Content>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <h2>{metadata.name}</h2>
-            <p>{work.date}</p>
+            <p>{moment.unix(work.date).format('M/D/Y h:mm:ss A')}</p>
           </div>
           <Card.Description>
             {metadata.description}
