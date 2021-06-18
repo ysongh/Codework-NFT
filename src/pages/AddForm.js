@@ -52,21 +52,33 @@ function AddForm({ walletAddress, codeworkNFTBlockchain}) {
     <Container>
       <Card centered style={{ width: '600px'}} color='purple'>
         <Card.Content>
+          <h1 style={{ fontSize: '1.8rem'}}>Need something to be build developers?</h1>
+          <p style={{ fontSize: '1rem', color: 'gray', marginBottom: '2rem' }}>
+            Fill the details below
+          </p>
           <Form>
             <Form.Field>
               <label>Title</label>
               <input value={name} onChange={(e) => setName(e.target.value)} />
             </Form.Field>
             <Form.Field>
-              <label>Image URL</label>
+              <label>Design or any file</label>
               <input type="file" onChange={getImage} />
             </Form.Field>
-            <Form.TextArea label='Description' value={description} onChange={(e) => setDescription(e.target.value)} />
+            <Form.TextArea
+              label='Description'
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              placeholder="Any requirements on what you need" />
             <Button
               type='submit'
               color="violet"
               onClick={upload}
-            >Create</Button>
+              disabled={!walletAddress}
+            >
+              Create
+            </Button>
+            {!walletAddress && <p style={{ marginTop: '.8rem' }}>Connect to your wallet</p>}
             {loading && <Spinner text="Creating..." />}
           </Form>
         </Card.Content>
