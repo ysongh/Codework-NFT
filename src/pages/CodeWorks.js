@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Grid, Card, Button } from 'semantic-ui-react';
+import { Container, Grid, Message, Card, Button } from 'semantic-ui-react';
 
 function CodeWorks({ codeworkNFTBlockchain }) {
   const [works, setWorks] = useState([]);
@@ -27,6 +27,10 @@ function CodeWorks({ codeworkNFTBlockchain }) {
 
   return (
     <Container>
+      <Message>
+        <Message.Header>Contract are not deployed yet</Message.Header>
+      </Message>
+      
       <h1>List of Bounties</h1>
       <Grid columns={3}>
         <Grid.Row>
