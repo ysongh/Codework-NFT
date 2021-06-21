@@ -60,4 +60,44 @@ contract('Codework NFT', ([deployer, account1, account2]) => {
         assert.equal(event.from, account1, 'Owner address is correct');
     });
   });
+
+  describe('pay coder', async() => {
+    let result;
+    let codeData;
+    let workId = 1;
+    let codeId = 1;
+    
+    before(async() => {
+      codeData = await contract.codeworkList(1);
+    });
+    
+    it('received correct funds', async() => {
+      let oldBalanace = await web3.eth.getBalance(account1);
+      oldBalanace = new web3.utils.BN(oldBalanace);
+
+      result = await contract.payCode(codeId, { from: account2, value: web3.utils.toWei(codeData.price.toString(), 'Ether') });
+      
+      let newBalanace = await web3.eth.getBalance(account1);
+      newBalanace = new web3.utils.BN(newBalanace);
+
+      let amount = web3.utils.toWei(codeData.price.toString(), 'Ether');
+      amount = new web3.utils.BN(amount);
+
+      const expectedBalance = oldBalanace.add(amount);
+
+      assert.equal(newBalanace.toString(), expectedBalance.toString());
+      
+      const event = result.logs[0].args;
+      assert.equal(event.from, account2, 'Payer address is correct');
+      assert.equal(event.to, account1, 'Coder address is correct');
+      assert.equal(event.workId, workId, 'Work Id is correct');
+      assert.equal(event.codeId, codeId, 'Code Id is correct');
+      assert.equal(event.amount.toString(), web3.utils.toWei(codeData.price.toString(), 'Ether'), 'Amount is correct');
+    });
+
+    it('set work completed to true', async() => {
+        let code = await contract.workList(workId);
+        assert.equal(code.isCompleted, true);
+    });
+  });
 })

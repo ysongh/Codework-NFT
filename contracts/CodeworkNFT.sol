@@ -44,7 +44,15 @@ contract CodeworkNFT is ERC721 {
     uint tokenId,
     string metadataURL,
     uint date,
-    address payable from
+    address from
+  );
+
+   event Payment (
+    address from,
+    address to,
+    uint workId,
+    uint codeId,
+    uint amount
   );
 
   constructor() ERC721("Codework NFT", "CWN")  public {}
@@ -69,5 +77,16 @@ contract CodeworkNFT is ERC721 {
 
     codeworkList[codeCount] = CodeWork(codeCount, _workId, _codeURL, now, _price, msg.sender);
     emit CodeWorkSubmit(codeCount, _workId, _codeURL, now, _price, msg.sender);
+  }
+
+  function payCode(uint _codeId) external payable {
+    CodeWork memory _codeWork = codeworkList[_codeId];
+
+    _codeWork.from.transfer(msg.value);
+
+    workList[_codeWork.workId].isCompleted = true;
+    codeworkList[_codeId] = _codeWork;
+
+    emit Payment(msg.sender, _codeWork.from, _codeWork.workId, _codeId, msg.value);
   }
 }
