@@ -55,7 +55,7 @@ contract('Codework NFT', ([deployer, account1, account2]) => {
         const event = result.logs[0].args;
         assert.equal(event.codeId.toNumber(), codeCount, 'Code Id is correct');
         assert.equal(event.workId.toNumber(), workId, 'Work Id is correct');
-        assert.equal(event.codeURLs, codeURL, 'Code URL is correct');
+        assert.equal(event.codeURL, codeURL, 'Code URL is correct');
         assert.equal(event.price, price, 'Price is correct');
         assert.equal(event.from, account1, 'Owner address is correct');
     });

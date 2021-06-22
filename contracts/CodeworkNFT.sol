@@ -34,7 +34,7 @@ contract CodeworkNFT is ERC721 {
   event CodeWorkSubmit (
     uint codeId,
     uint workId,
-    string codeURLs,
+    string codeURL,
     uint date,
     uint price,
     address payable from

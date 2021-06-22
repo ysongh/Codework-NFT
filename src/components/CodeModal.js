@@ -35,7 +35,7 @@ function CodeModal({ open, setOpen, id, walletAddress, codeworkNFTBlockchain, us
     
       console.log(event);
       let temp = userWorks;
-      temp.push(event);
+      temp.push(event.events.CodeWorkSubmit.returnValues);
       setUserWorks(temp);
       setOpen(false)
       setLoading(false);
