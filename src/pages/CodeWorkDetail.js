@@ -77,7 +77,7 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
             <Grid.Column key={code.codeId} style={{marginBottom: '1rem'}}>
               <Card color='orange'>
                 <Card.Content>
-                  <Card.Header>{code.price} ETH</Card.Header>
+                  <Card.Header>{window.web3.utils.fromWei(code.price, 'Ether')} ETH</Card.Header>
                   <Card.Description>
                     {code.from}
                   </Card.Description>

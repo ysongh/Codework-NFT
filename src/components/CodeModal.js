@@ -30,7 +30,7 @@ function CodeModal({ open, setOpen, id, walletAddress, codeworkNFTBlockchain, us
       console.log(uploadedFile.key);
 
       const event = await codeworkNFTBlockchain.methods
-        .addCodeToWork(id, price, uploadedFile.key)
+        .addCodeToWork(id,  window.web3.utils.toWei(price, 'Ether'), uploadedFile.key)
         .send({ from: walletAddress });
     
       console.log(event);
@@ -57,7 +57,7 @@ function CodeModal({ open, setOpen, id, walletAddress, codeworkNFTBlockchain, us
       <Modal.Content>
         <Form>
           <Form.Field>
-            <label>Price</label>
+            <label>Price (ETH)</label>
             <input value={price} onChange={(e) => setPrice(e.target.value)} />
           </Form.Field>
           <Form.Field>
