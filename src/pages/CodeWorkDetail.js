@@ -50,6 +50,14 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
     return 'https://ipfs.io/ipfs/' + ipfsURL[1];
   }
 
+  const payCoder = async (codeId, price) => {
+    const data = await codeworkNFTBlockchain.methods
+      .payCode(codeId)
+      .send({ from: walletAddress, value: price });
+    
+    console.log(data);
+  }
+
   return (
     <Container>
       <Card color='orange' fluid>
@@ -64,9 +72,12 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
           <br />
           <img src={getImage(metadata.image)} alt="Design" style={{width: '50%'}} />
           <br />
-          <Button color="violet" onClick={() => setOpen(true)}>
-            Add your code
-          </Button>
+          <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+            <Button color="violet" onClick={() => setOpen(true)}>
+              Add your code
+            </Button>
+            {work.isCompleted && <p>Completed</p>}
+          </div>
         </Card.Content>
       </Card>
 
@@ -93,7 +104,7 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
                         See Work
                       </Button>
                     </a>
-                    <Button basic color='teal'>
+                    <Button basic color='teal' onClick={() => payCoder(code.codeId, code.price)}>
                       Pay and get code
                     </Button>
                   </div>
