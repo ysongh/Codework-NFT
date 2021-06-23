@@ -6,6 +6,7 @@ import CardLoading from '../components/CardLoading';
 
 function CodeWorks({ codeworkNFTBlockchain }) {
   const [works, setWorks] = useState([]);
+  const [showMessage, setShowMessage] = useState(true);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -37,11 +38,16 @@ function CodeWorks({ codeworkNFTBlockchain }) {
     if (codeworkNFTBlockchain) loadWorks();
   }, [codeworkNFTBlockchain])
 
+  const handleDismiss = () => {
+    setShowMessage(false);
+  }
+
   return (
     <Container>
-      <Message>
-        <Message.Header>Contract are not deployed yet</Message.Header>
-      </Message>
+      {showMessage && <Message
+        onDismiss={handleDismiss}
+        header='Contract are not deployed yet'
+      />}
       
       <h1>List of Bounties</h1>
       {loading
