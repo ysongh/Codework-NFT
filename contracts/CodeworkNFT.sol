@@ -58,18 +58,10 @@ contract CodeworkNFT is ERC721 {
   constructor() ERC721("Codework NFT", "CWN")  public {}
 
   function createWork(string memory _metadataURL) external {
-      worksCount++;
+    worksCount++;
 
-      workList[worksCount] = Works(worksCount, _metadataURL, now, false, msg.sender);
-      emit WorkCreated(worksCount, _metadataURL, now, msg.sender);
-    }
-
-  function mintCodeworkNFT(string memory _metadataURL) external {
-    uint _tokenId = totalSupply().add(1);
-    _safeMint(msg.sender, _tokenId);
-    _setTokenURI(_tokenId, _metadataURL);
-
-    emit CodeworkCreated(_tokenId, _metadataURL, now, msg.sender);
+    workList[worksCount] = Works(worksCount, _metadataURL, now, false, msg.sender);
+    emit WorkCreated(worksCount, _metadataURL, now, msg.sender);
   }
 
   function addCodeToWork(uint _workId, uint _price, string memory _codeURL) external {
