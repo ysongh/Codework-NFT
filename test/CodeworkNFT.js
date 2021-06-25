@@ -47,18 +47,32 @@ contract('Codework NFT', ([deployer, account1, account2]) => {
     const codeURL = "hi2h99shji2jhr3oi2";
 
     before(async() => {
-        result = await contract.addCodeToWork(workId, price, codeURL, { from: account1 });
-        codeCount = await contract.codeCount();
+      result = await contract.addCodeToWork(workId, price, codeURL, { from: account1 });
+      codeCount = await contract.codeCount();
     });
 
     it('add code work', async() => {
-        const event = result.logs[0].args;
-        assert.equal(event.codeId.toNumber(), codeCount, 'Code Id is correct');
-        assert.equal(event.workId.toNumber(), workId, 'Work Id is correct');
-        assert.equal(event.codeURL, codeURL, 'Code URL is correct');
-        assert.equal(event.price, price, 'Price is correct');
-        assert.equal(event.from, account1, 'Owner address is correct');
+      const event = result.logs[1].args;
+      assert.equal(event.codeId.toNumber(), codeCount, 'Code Id is correct');
+      assert.equal(event.workId.toNumber(), workId, 'Work Id is correct');
+      assert.equal(event.codeURL, codeURL, 'Code URL is correct');
+      assert.equal(event.price, price, 'Price is correct');
+      assert.equal(event.from, account1, 'Owner address is correct');
     });
+
+    it('mints NFT for coder', async () => {
+      result = await contract.totalSupply();
+      assert.equal(result.toString(), '1', 'Total supply is correct');
+
+      result = await contract.balanceOf(account1);
+      assert.equal(result.toString(), '1', 'balanceOf is correct');
+
+      result = await contract.ownerOf('1');
+      assert.equal(result.toString(), account1.toString(), 'Coder got a NFT');
+
+      result = await contract.tokenURI('1');
+      assert.equal(result.toString(), codeURL, 'NFT URI is correct');
+    })
   });
 
   describe('pay coder', async() => {
