@@ -57,7 +57,7 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
     
     console.log(data);
   }
-
+  
   return (
     <Container>
       <Card color='orange' fluid>
@@ -95,18 +95,21 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
                 </Card.Content>
                 <Card.Content extra>
                   <div className='ui two buttons'>
-                    <a
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      href={"https://storageapi.fleek.co/ysongh-69207-team-bucket/" + code.codeURL}
-                    >
-                      <Button basic color='violet'>
-                        See Work
-                      </Button>
-                    </a>
+                    {code.viewer == walletAddress ? (
+                      <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href={"https://storageapi.fleek.co/ysongh-69207-team-bucket/" + code.codeURL}
+                      >
+                        <Button basic color='violet'>
+                          See Work
+                        </Button>
+                      </a>
+                    ) : (
                     <Button basic color='teal' onClick={() => payCoder(code.codeId, code.price)}>
-                      Pay and get code
+                      Pay to get code
                     </Button>
+                    )}
                   </div>
                 </Card.Content>
               </Card>
