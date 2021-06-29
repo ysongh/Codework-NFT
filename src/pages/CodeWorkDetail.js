@@ -4,6 +4,7 @@ import { Container, Grid, Card, Button } from 'semantic-ui-react';
 import moment from 'moment';
 
 import CodeModal from '../components/CodeModal';
+import CodeList from '../components/CodeList';
 
 function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
   const { cid, id } = useParams();
@@ -57,7 +58,7 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
     
     console.log(data);
   }
-  
+
   return (
     <Container>
       <Card color='orange' fluid>
@@ -85,35 +86,11 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
       <Grid columns={3}>
         <Grid.Row>
           {userWorks.map(code => (
-            <Grid.Column key={code.codeId} style={{marginBottom: '1rem'}}>
-              <Card color='orange'>
-                <Card.Content>
-                  <Card.Header>{window.web3.utils.fromWei(code.price, 'Ether')} ETH</Card.Header>
-                  <Card.Description>
-                    {code.from}
-                  </Card.Description>
-                </Card.Content>
-                <Card.Content extra>
-                  <div className='ui two buttons'>
-                    {code.viewer == walletAddress ? (
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href={"https://storageapi.fleek.co/ysongh-69207-team-bucket/" + code.codeURL}
-                      >
-                        <Button basic color='violet'>
-                          See Work
-                        </Button>
-                      </a>
-                    ) : (
-                    <Button basic color='teal' onClick={() => payCoder(code.codeId, code.price)}>
-                      Pay to get code
-                    </Button>
-                    )}
-                  </div>
-                </Card.Content>
-              </Card>
-            </Grid.Column>
+            <CodeList
+              code={code}
+              walletAddress={walletAddress}
+              payCoder={payCoder}
+            />
           ))}
         </Grid.Row>
       </Grid>
