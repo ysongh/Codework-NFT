@@ -90,6 +90,7 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
               code={code}
               walletAddress={walletAddress}
               payCoder={payCoder}
+              codeworkNFTBlockchain={codeworkNFTBlockchain}
             />
           ))}
         </Grid.Row>
