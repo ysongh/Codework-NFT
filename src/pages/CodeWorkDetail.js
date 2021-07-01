@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Container, Grid, Card, Button } from 'semantic-ui-react';
+import { Container, Grid, Card, Button, Placeholder } from 'semantic-ui-react';
 import moment from 'moment';
 
 import CodeModal from '../components/CodeModal';
@@ -71,7 +71,10 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
             {metadata.description}
           </Card.Description>
           <br />
-          <img src={getImage(metadata.image)} alt="Design" style={{width: '50%'}} />
+          {metadata.image ? <img src={getImage(metadata.image)} alt="Design" style={{width: '50%'}} />
+          : <Placeholder style={{ height: 300, width: 400 }}>
+              <Placeholder.Image />
+            </Placeholder> }
           <br />
           <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
             <Button color="violet" onClick={() => setOpen(true)}>
