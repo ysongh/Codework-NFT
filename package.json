@@ -20,6 +20,7 @@
   },
   "devDependencies": {
     "@openzeppelin/contracts": "^3.4.0",
+    "@truffle/hdwallet-provider": "^1.4.1",
     "chai": "^4.3.4"
   },
   "scripts": {

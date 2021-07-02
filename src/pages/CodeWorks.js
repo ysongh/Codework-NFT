@@ -46,7 +46,7 @@ function CodeWorks({ codeworkNFTBlockchain }) {
     <Container>
       {showMessage && <Message
         onDismiss={handleDismiss}
-        header='Contract are not deployed yet'
+        header='Contract is deployed on Kovan Test Network'
       />}
       
       <h1>List of Bounties</h1>
