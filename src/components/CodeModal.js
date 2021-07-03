@@ -3,7 +3,7 @@ import { Button, Modal, Form } from 'semantic-ui-react';
 import fleekStorage from '@fleekhq/fleek-storage-js'
 
 import { fleekAPIKey, fleekAPISecret } from '../config';
-import Spinner from '../components/Spinner';
+import Spinner from './common/Spinner';
 
 function CodeModal({ open, setOpen, id, walletAddress, codeworkNFTBlockchain, userWorks, setUserWorks }) {
   const [price, setPrice] = useState('');

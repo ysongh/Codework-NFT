@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Grid, Message, Card, Button } from 'semantic-ui-react';
 
-import CardLoading from '../components/CardLoading';
+import CardLoading from '../components/common/CardLoading';
 
 function CodeWorks({ codeworkNFTBlockchain }) {
   const [works, setWorks] = useState([]);

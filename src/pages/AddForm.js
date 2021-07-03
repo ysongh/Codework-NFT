@@ -4,7 +4,7 @@ import { NFTStorage, File } from 'nft.storage';
 import { Container, Card, Form, Button } from 'semantic-ui-react';
 
 import { NFTStorageAPIKey } from '../config';
-import Spinner from '../components/Spinner';
+import Spinner from '../components/common/Spinner';
 const apiKey = NFTStorageAPIKey;
 const client = new NFTStorage({ token: apiKey })
 

@@ -4,7 +4,7 @@ import Web3 from 'web3';
 
 import './App.css';
 import CodeworkNFT from './abis/CodeworkNFT.json';
-import Navbar from './components/Navbar';
+import Navbar from './components/layout/Navbar';
 import AddForm from './pages/AddForm';
 import CodeWorks from './pages/CodeWorks';
 import CodeWorkDetail from './pages/CodeWorkDetail';

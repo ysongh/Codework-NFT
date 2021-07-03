@@ -85,7 +85,10 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
         </Card.Content>
       </Card>
 
-      <h2>Submission</h2>
+      <h2>Submissions</h2>
+      <hr />
+      <br />
+
       <Grid columns={3}>
         <Grid.Row>
           {userWorks.map(code => (
