@@ -89,7 +89,7 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
       <hr />
       <br />
 
-      <Grid columns={3}>
+      <Grid columns={3} doubling>
         <Grid.Row>
           {userWorks.map(code => (
             <CodeList
