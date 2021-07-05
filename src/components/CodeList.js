@@ -17,10 +17,12 @@ function CodeList({ code, walletAddress, payCoder, codeworkNFTBlockchain }) {
     <Grid.Column key={code.codeId} style={{marginBottom: '1rem'}}>
       <Card color='orange'>
         <Card.Content>
-          <Card.Header>{window.web3.utils.fromWei(code.price, 'Ether')} ETH</Card.Header>
           <Card.Description>
-            {code.from}
+            {code.from.substring(0,8)}...{code.from.substring(34,42)}
           </Card.Description>
+          <Card.Meta>Owner</Card.Meta>
+          <br />
+          <Card.Header>{window.web3.utils.fromWei(code.price, 'Ether')} ETH</Card.Header>
         </Card.Content>
         <Card.Content extra>
           {code.viewer === walletAddress ? (
@@ -29,12 +31,12 @@ function CodeList({ code, walletAddress, payCoder, codeworkNFTBlockchain }) {
               rel="noopener noreferrer"
               href={"https://storageapi.fleek.co/ysongh-69207-team-bucket/" + hash}
             >
-              <Button basic color='violet'>
+              <Button basic color='violet' fluid>
                 See Work
               </Button>
             </a>
           ) : (
-          <Button basic color='teal' onClick={() => payCoder(code.codeId, code.price)}>
+          <Button basic color='teal' onClick={() => payCoder(code.codeId, code.price)} fluid>
             Pay to get code
           </Button>
           )}
