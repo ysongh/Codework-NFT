@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Grid, Message, Card, Button } from 'semantic-ui-react';
 
+import { NFTStorageAPIKey } from '../config';
 import CardLoading from '../components/common/CardLoading';
 
-function CodeWorks({ codeworkNFTBlockchain }) {
+function CodeWorks() {
   const [works, setWorks] = useState([]);
   const [showMessage, setShowMessage] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -13,15 +14,20 @@ function CodeWorks({ codeworkNFTBlockchain }) {
     const loadWorks = async () => {
       try{
         setLoading(true);
-        const worksCount = await codeworkNFTBlockchain.methods.worksCount().call();
+        let cids = await fetch('https://api.nft.storage', {
+          headers: {
+            'Authorization': `Bearer ${NFTStorageAPIKey}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        cids = await cids.json();
+        console.log(cids.value);
+
         const temp = [];
-        for (let i = 1; i <= worksCount; i++) {
-          const work = await codeworkNFTBlockchain.methods.workList(i).call();
-          work.metadataURL = work.metadataURL.split("://");
-          let data = await fetch('https://ipfs.io/ipfs/' + work.metadataURL[1]);
+        for (let cid of cids.value) {
+          let data = await fetch(`https://ipfs.io/ipfs/${cid.cid}/metadata.json`);
           data = await data.json();
-          data.id = work.metadataURL[1];
-          data.cid = work.metadataURL[1].slice(0, 59);
+          data.cid = cid.cid;
           console.log(data);
           temp.push(data);
         }
@@ -35,8 +41,8 @@ function CodeWorks({ codeworkNFTBlockchain }) {
       
     }
 
-    if (codeworkNFTBlockchain) loadWorks();
-  }, [codeworkNFTBlockchain])
+    loadWorks();
+  }, [])
 
   const handleDismiss = () => {
     setShowMessage(false);
@@ -73,13 +79,9 @@ function CodeWorks({ codeworkNFTBlockchain }) {
                       </Card>
                     </Grid.Column>
                   ))
-                : codeworkNFTBlockchain
-                  ? <p className="home__message">
-                      No Bounties Yet
-                    </p>
-                  : <p className="home__message">
-                      Connect to your wallet to see bounties
-                    </p>
+                : <p className="home__message">
+                    No Bounties Yet
+                  </p>
               }
             </Grid.Row>
           </Grid>
