@@ -45,6 +45,7 @@ function CodeWorks({ codeworkNFTBlockchain }) {
   return (
     <Container>
       {showMessage && <Message
+        color='teal'
         onDismiss={handleDismiss}
         header='Contract is deployed on Kovan Test Network'
       />}
@@ -54,23 +55,32 @@ function CodeWorks({ codeworkNFTBlockchain }) {
         ? <CardLoading />
         : <Grid columns={3}>
             <Grid.Row>
-              {works.map((work, index) => (
-                <Grid.Column key={work.id} style={{marginBottom: '1rem'}}>
-                  <Card color='orange'>
-                    <Card.Content>
-                      <Card.Header>{work.name}</Card.Header>
-                      <Card.Description>
-                        {work.description}
-                      </Card.Description>
-                      <div style={{marginTop: '.7rem'}}>
-                        <Button color='violet' as={Link} to={`/works/${work.cid}/${index + 1}`}>
-                          View
-                        </Button>
-                      </div>
-                    </Card.Content>
-                  </Card>
-                </Grid.Column>
-              ))}
+              {works.length
+                ? works.map((work, index) => (
+                    <Grid.Column key={work.id} style={{marginBottom: '1rem'}}>
+                      <Card color='orange'>
+                        <Card.Content>
+                          <Card.Header>{work.name}</Card.Header>
+                          <Card.Description>
+                            {work.description}
+                          </Card.Description>
+                          <div style={{marginTop: '.7rem'}}>
+                            <Button color='violet' as={Link} to={`/works/${work.cid}/${index + 1}`}>
+                              View
+                            </Button>
+                          </div>
+                        </Card.Content>
+                      </Card>
+                    </Grid.Column>
+                  ))
+                : codeworkNFTBlockchain
+                  ? <p className="home__message">
+                      No Bounties Yet
+                    </p>
+                  : <p className="home__message">
+                      Connect to your wallet to see bounties
+                    </p>
+              }
             </Grid.Row>
           </Grid>
       }
