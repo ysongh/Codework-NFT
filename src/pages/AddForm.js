@@ -28,12 +28,20 @@ function AddForm() {
   const upload = async () => {
     try{
       setLoading(true);
-      const metadata = await client.store({
-        name: name,
-        description: description,
-        image: new File([image], imageName, { type: imageType })
-      })
-      console.log(metadata.url);
+
+      const metadata = await client.storeDirectory([
+        new File([image], imageName),
+        new File([JSON.stringify(
+          {
+            name: name,
+            description: description,
+          },
+          null,
+          2
+        )], 'metadata.json')
+      ])
+
+      console.log(metadata);
 
       history.push('/');
     } catch(err) {
