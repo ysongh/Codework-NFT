@@ -8,14 +8,13 @@ import Spinner from '../components/common/Spinner';
 const apiKey = NFTStorageAPIKey;
 const client = new NFTStorage({ token: apiKey })
 
-function AddForm({ walletAddress, codeworkNFTBlockchain}) {
+function AddForm() {
   const history = useHistory();
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState('');
   const [imageName, setImageName] = useState('');
   const [imageType, setImageType] = useState('');
-  const [metadataURL, setMetadataURL] = useState('');
   const [loading, setLoading] = useState(false);
 
   const getImage = event => {
@@ -35,13 +34,7 @@ function AddForm({ walletAddress, codeworkNFTBlockchain}) {
         image: new File([image], imageName, { type: imageType })
       })
       console.log(metadata.url);
-      setMetadataURL(metadata.url);
 
-      const event = await codeworkNFTBlockchain.methods
-        .createWork(metadata.url)
-        .send({ from: walletAddress });
-
-      console.log(event);
       history.push('/');
     } catch(err) {
       console.error(err);
@@ -74,17 +67,14 @@ function AddForm({ walletAddress, codeworkNFTBlockchain}) {
               type='submit'
               color="violet"
               onClick={upload}
-              disabled={!walletAddress}
             >
               Create
             </Button>
-            {!walletAddress && <p style={{ marginTop: '.8rem' }}>Connect to your wallet</p>}
+            
             {loading && <Spinner text="Creating..." />}
           </Form>
         </Card.Content>
       </Card>
-
-      <p>{metadataURL}</p>
     </Container>
   )
 }

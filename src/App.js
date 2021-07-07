@@ -50,9 +50,7 @@ function App() {
         setAccount={setAccount} />
       <Switch>
         <Route path="/addform">
-          <AddForm
-            walletAddress={account}
-            codeworkNFTBlockchain={codeworkNFTBlockchain} />
+          <AddForm />
         </Route>
         <Route path="/works/:cid/:id">
           <CodeWorkDetail

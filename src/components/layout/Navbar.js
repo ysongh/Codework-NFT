@@ -6,7 +6,13 @@ function Navbar({ loadBlockchain, walletAddress, setAccount }) {
   return (
     <Menu color="violet" inverted pointing>
       <Container>
-        <img src='/logo.png' style={{ width: '10rem'}} alt="Logo" />
+        <Menu.Item
+          as={Link}
+          to="/"
+        >
+          <img src='/logo.png' style={{ width: '10rem'}} alt="Logo" />
+        </Menu.Item>
+        
         <Menu.Item
           as={Link}
           to="/"
