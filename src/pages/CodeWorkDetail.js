@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Container, Grid, Card, Button, Placeholder } from 'semantic-ui-react';
 import moment from 'moment';
 
+import { NFTStorageAPIKey } from '../config';
 import CodeModal from '../components/CodeModal';
 import CodeList from '../components/CodeList';
 
@@ -10,6 +11,7 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
   const { cid, id } = useParams();
   const [work, setWork] = useState({});
   const [metadata, setMetadata] = useState({});
+  const [imageHash, setImageHash] = useState("");
   const [userWorks, setUserWorks] = useState([]);
   const [open, setOpen] = useState(false);
 
@@ -26,6 +28,18 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
       console.log(data);
       setMetadata(data);
     }
+    
+    const getImages = async () => {
+      let data = await fetch(`https://api.nft.storage/${cid}`, {
+        headers: {
+          'Authorization': `Bearer ${NFTStorageAPIKey}`,
+          'Content-Type': 'application/json'
+        }
+      });
+      data = await data.json();
+      console.log(data);
+      setImageHash(data.value.files[0].name);
+    }
 
     const getUserWorks = async () => {
       const codeCount = await codeworkNFTBlockchain.methods.codeCount().call();
@@ -38,18 +52,15 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
       setUserWorks(temp);
     }
 
-    if(cid) getMetadata();
+    if(cid){
+      getMetadata();
+      getImages();
+    }
     if(codeworkNFTBlockchain){
       getWork();
       getUserWorks();
     }
   }, [cid, id, codeworkNFTBlockchain]);
-
-  const getImage = ipfsURL => {
-    if(!ipfsURL) return;
-    ipfsURL = ipfsURL.split("://");
-    return 'https://ipfs.io/ipfs/' + ipfsURL[1];
-  }
 
   const payCoder = async (codeId, price) => {
     const data = await codeworkNFTBlockchain.methods
@@ -71,7 +82,7 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
             {metadata.description}
           </Card.Description>
           <br />
-          {metadata.image ? <img src={getImage(metadata.image)} alt="Design" style={{width: '50%'}} />
+          {imageHash ? <img src={`https://ipfs.io/ipfs/${cid}/${imageHash}`} alt="Design" style={{width: '50%'}} />
           : <Placeholder style={{ height: 300, width: 400 }}>
               <Placeholder.Image />
             </Placeholder> }

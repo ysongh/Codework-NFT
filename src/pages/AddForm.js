@@ -30,7 +30,7 @@ function AddForm() {
       setLoading(true);
 
       const metadata = await client.storeDirectory([
-        new File([image], imageName),
+        new File([image], imageName, { type: imageType }),
         new File([JSON.stringify(
           {
             name: name,
