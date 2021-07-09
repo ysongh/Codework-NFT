@@ -63,8 +63,9 @@ function AddForm() {
               <input value={name} onChange={(e) => setName(e.target.value)} />
             </Form.Field>
             <Form.Field>
-              <label>Design or any file</label>
-              <input type="file" onChange={getImage} />
+              <label>Upload files</label>
+              <label htmlFor="img" className="btn-file">Upload</label>
+              <input id="img" type="file" onChange={getImage} style={{ display: "none"}}/>
             </Form.Field>
             <Form.TextArea
               label='Description'
