@@ -12,26 +12,28 @@ function AddForm() {
   const history = useHistory();
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const [image, setImage] = useState('');
-  const [imageName, setImageName] = useState('');
-  const [imageType, setImageType] = useState('');
+  const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const getImage = event => {
     const file = event.target.files[0];
     console.log(file);
-    setImage(file);
-    setImageName(file.name);
-    setImageType(file.type);
+
+    setImages([...images, {
+      file: file,
+      fileName: file.name,
+      fileType: file.type
+    }]);
   }
 
   const upload = async () => {
     try{
       setLoading(true);
+      console.log(images);
 
-      const metadata = await client.storeDirectory([
-        new File([image], imageName, { type: imageType }),
-        new File([JSON.stringify(
+      let sendFiles = [];
+      sendFiles.push(new File(
+        [JSON.stringify(
           {
             name: name,
             description: description,
@@ -39,8 +41,13 @@ function AddForm() {
           null,
           2
         )], 'metadata.json')
-      ])
+      );
+      
+      for(let image of images){
+        sendFiles.push(new File([image.file], image.fileName, { type: image.fileType }));
+      }
 
+      const metadata = await client.storeDirectory(sendFiles);
       console.log(metadata);
 
       history.push('/');
@@ -65,7 +72,11 @@ function AddForm() {
             <Form.Field>
               <label>Upload files</label>
               <label htmlFor="img" className="btn-file">Upload</label>
-              <input id="img" type="file" onChange={getImage} style={{ display: "none"}}/>
+              <input id="img" type="file" onChange={getImage} style={{ display: 'none' }}/>
+              <div style={{ marginBottom: "1rem" }}></div>
+              {images.map(image => (
+                <p>{image.fileName}</p>
+              ))}
             </Form.Field>
             <Form.TextArea
               label='Description'
