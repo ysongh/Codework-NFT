@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { NFTStorage, File } from 'nft.storage';
-import { Container, Card, Form, Button } from 'semantic-ui-react';
+import { Container, Card, Form, Button, Icon } from 'semantic-ui-react';
 
 import { NFTStorageAPIKey } from '../config';
 import Spinner from '../components/common/Spinner';
@@ -56,6 +56,11 @@ function AddForm() {
       setLoading(false);
     }
   }
+
+  const removeFile = fileName => {
+    setImages(images.filter(image => image.fileName !== fileName));
+  }
+
   return (
     <Container>
       <Card centered style={{ width: '600px'}} color='purple'>
@@ -74,8 +79,14 @@ function AddForm() {
               <label htmlFor="img" className="btn-file">Upload</label>
               <input id="img" type="file" onChange={getImage} style={{ display: 'none' }}/>
               <div style={{ marginBottom: "1rem" }}></div>
-              {images.map(image => (
-                <p>{image.fileName}</p>
+              {images.map((image, index) => (
+                <div key={index} className="flex-space-between">
+                  <p>{image.fileName}</p>
+                  <Button icon color="red" onClick={() => removeFile(image.fileName)}>
+                    <Icon name='trash' />
+                  </Button>
+                </div>
+                
               ))}
             </Form.Field>
             <Form.TextArea
