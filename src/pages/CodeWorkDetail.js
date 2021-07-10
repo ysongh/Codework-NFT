@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Container, Grid, Card, Button, Placeholder } from 'semantic-ui-react';
+import { Container, Grid, Card, Button } from 'semantic-ui-react';
 import moment from 'moment';
 
 import { NFTStorageAPIKey } from '../config';
 import CodeModal from '../components/CodeModal';
 import CodeList from '../components/CodeList';
+import ImageList from '../components/ImageList';
 
 function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
   const { cid, id } = useParams();
   const [work, setWork] = useState({});
   const [metadata, setMetadata] = useState({});
-  const [imageHash, setImageHash] = useState("");
+  const [imageHashes, setImageHashes] = useState([]);
   const [userWorks, setUserWorks] = useState([]);
   const [open, setOpen] = useState(false);
 
@@ -38,7 +39,14 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
       });
       data = await data.json();
       console.log(data);
-      setImageHash(data.value.files[0].name);
+
+      let temp = [];
+      
+      for (let i = 1; i < data.value.files.length; i++) {
+        temp.push(data.value.files[i].name)
+      }
+
+      setImageHashes(temp);
     }
 
     const getUserWorks = async () => {
@@ -82,10 +90,13 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
             {metadata.description}
           </Card.Description>
           <br />
-          {imageHash ? <img src={`https://ipfs.io/ipfs/${cid}/${imageHash}`} alt="Design" style={{width: '50%'}} />
-          : <Placeholder style={{ height: 300, width: 400 }}>
-              <Placeholder.Image />
-            </Placeholder> }
+          <Grid columns={3} doubling>
+            <Grid.Row>
+              {imageHashes.map((hash, index) => (
+                <ImageList key={index} hash={hash} cid={cid} />
+              ))}
+            </Grid.Row>
+          </Grid>
           <br />
           <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
             <Button color="violet" onClick={() => setOpen(true)}>
