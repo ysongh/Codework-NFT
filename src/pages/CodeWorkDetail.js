@@ -90,7 +90,7 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
             {metadata.description}
           </Card.Description>
           <br />
-          <Grid columns={3} doubling>
+          <Grid columns={4} doubling>
             <Grid.Row>
               {imageHashes.map((hash, index) => (
                 <ImageList key={index} hash={hash} cid={cid} />
