@@ -1,18 +1,14 @@
 import React, { useState } from 'react';
 import { Grid } from 'semantic-ui-react';
 
-import ImageModal from '../components/ImageModal';
-
-function ImageList({ hash, cid }) {
-  const [openModal, setOpenModal] = useState(false);
-
+function ImageList({ hash, cid, setCurrentImage, setOpenImageModal }) {
+  const handelClick = () => {
+    setCurrentImage(`https://ipfs.io/ipfs/${cid}/${hash}`)
+    setOpenImageModal(true);
+  }
   return (
-    <Grid.Column onClick={() => setOpenModal(true)}>
+    <Grid.Column className="cursor-pointer" onClick={handelClick}>
       <img src={`https://ipfs.io/ipfs/${cid}/${hash}`} alt="Design" />
-      <ImageModal
-         openModal={openModal}
-         setOpenModal={setOpenModal}
-         imageURL={`https://ipfs.io/ipfs/${cid}/${hash}`} />
     </Grid.Column>
   )
 }

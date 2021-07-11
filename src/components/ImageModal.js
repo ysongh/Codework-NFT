@@ -1,23 +1,23 @@
 import React from 'react';
-import { Modal, Image } from 'semantic-ui-react';
+import { Modal, Image, Button } from 'semantic-ui-react';
 
-function ImageModal({ openModal, setOpenModal, imageURL }) {
+function ImageModal({ openImageModal, setOpenImageModal, imageURL }) {
   return (
     <Modal
-      onClose={() => setOpenModal(false)}
-      onOpen={() => setOpenModal(true)}
-      open={openModal}
+      onClose={() => setOpenImageModal(false)}
+      onOpen={() => setOpenImageModal(true)}
+      open={openImageModal}
       dimmer='inverted'
       size="large"
     >
       <Modal.Content>
         <Image src={imageURL} alt="Design" fluid />
       </Modal.Content>
-      {/* <Modal.Actions>
-        <Button onClick={() => setOpenModal(false)}>
+      <Modal.Actions>
+        <Button onClick={() => setOpenImageModal(false)}>
           Close
         </Button>
-      </Modal.Actions> */}
+      </Modal.Actions>
     </Modal>
   )
 }

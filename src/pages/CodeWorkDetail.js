@@ -5,6 +5,7 @@ import moment from 'moment';
 
 import { NFTStorageAPIKey } from '../config';
 import CodeModal from '../components/CodeModal';
+import ImageModal from '../components/ImageModal';
 import CodeList from '../components/CodeList';
 import ImageList from '../components/ImageList';
 
@@ -15,6 +16,8 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
   const [imageHashes, setImageHashes] = useState([]);
   const [userWorks, setUserWorks] = useState([]);
   const [open, setOpen] = useState(false);
+  const [openImageModal, setOpenImageModal] = useState(false);
+  const [currentImage, setCurrentImage] = useState("");
 
   useEffect(() => {
     const getWork = async () => {
@@ -93,7 +96,7 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
           <Grid columns={4} doubling>
             <Grid.Row>
               {imageHashes.map((hash, index) => (
-                <ImageList key={index} hash={hash} cid={cid} />
+                <ImageList key={index} hash={hash} cid={cid} setCurrentImage={setCurrentImage} setOpenImageModal={setOpenImageModal} />
               ))}
             </Grid.Row>
           </Grid>
@@ -132,6 +135,11 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
         codeworkNFTBlockchain={codeworkNFTBlockchain}
         userWorks={userWorks}
         setUserWorks={setUserWorks} />
+
+      <ImageModal
+        openImageModal={openImageModal}
+        setOpenImageModal={setOpenImageModal}
+        imageURL={currentImage} />
     </Container>
   )
 }
