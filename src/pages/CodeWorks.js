@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Grid, Message, Card, Button } from 'semantic-ui-react';
+import dateFormat from 'dateformat';
 
 import { NFTStorageAPIKey } from '../config';
 import CardLoading from '../components/common/CardLoading';
-
-var dateFormat = require('dateformat');
 
 function CodeWorks() {
   const [works, setWorks] = useState([]);
@@ -52,7 +51,7 @@ function CodeWorks() {
   }
 
   return (
-    <Container>
+    <Container className="bodyHeight">
       {showMessage && <Message
         color='teal'
         onDismiss={handleDismiss}

@@ -62,7 +62,7 @@ function AddForm() {
   }
 
   return (
-    <Container>
+    <Container className="bodyHeight">
       <Card centered style={{ width: '600px'}} color='purple'>
         <Card.Content>
           <h1 style={{ fontSize: '1.8rem'}}>Need something to be build developers?</h1>

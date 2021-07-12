@@ -82,7 +82,7 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
   }
 
   return (
-    <Container>
+    <Container className="bodyHeight">
       <Card color='orange' fluid>
         <Card.Content>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>

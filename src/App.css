@@ -29,3 +29,7 @@
 .cursor-pointer {
     cursor: pointer;
 }
+
+.bodyHeight{
+    min-height: 81vh;
+}

@@ -5,6 +5,7 @@ import Web3 from 'web3';
 import './App.css';
 import CodeworkNFT from './abis/CodeworkNFT.json';
 import Navbar from './components/layout/Navbar';
+import Footer from './components/layout/Footer';
 import AddForm from './pages/AddForm';
 import CodeWorks from './pages/CodeWorks';
 import CodeWorkDetail from './pages/CodeWorkDetail';
@@ -61,6 +62,7 @@ function App() {
           <CodeWorks />
         </Route>
       </Switch>
+      <Footer />
     </Router>
   );
 }
