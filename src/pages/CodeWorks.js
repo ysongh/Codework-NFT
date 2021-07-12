@@ -5,6 +5,8 @@ import { Container, Grid, Message, Card, Button } from 'semantic-ui-react';
 import { NFTStorageAPIKey } from '../config';
 import CardLoading from '../components/common/CardLoading';
 
+var dateFormat = require('dateformat');
+
 function CodeWorks() {
   const [works, setWorks] = useState([]);
   const [showMessage, setShowMessage] = useState(true);
@@ -28,6 +30,7 @@ function CodeWorks() {
           let data = await fetch(`https://ipfs.io/ipfs/${cid.cid}/metadata.json`);
           data = await data.json();
           data.cid = cid.cid;
+          data.created = cid.created;
           console.log(data);
           temp.push(data);
         }
@@ -59,14 +62,17 @@ function CodeWorks() {
       <h1>List of Bounties</h1>
       {loading
         ? <CardLoading />
-        : <Grid columns={3}>
+        : <Grid columns={3} doubling>
             <Grid.Row>
               {works.length
                 ? works.map((work, index) => (
-                    <Grid.Column key={work.id} style={{marginBottom: '1rem'}}>
+                    <Grid.Column key={index} style={{marginBottom: '1rem'}}>
                       <Card color='orange'>
                         <Card.Content>
                           <Card.Header>{work.name}</Card.Header>
+                          <Card.Meta>
+                            {dateFormat(work.created, "mmmm dS, yyyy, h:MM:ss TT")}
+                          </Card.Meta>
                           <Card.Description>
                             {work.description}
                           </Card.Description>
