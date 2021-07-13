@@ -20,12 +20,6 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
   const [currentImage, setCurrentImage] = useState("");
 
   useEffect(() => {
-    const getWork = async () => {
-      const data = await codeworkNFTBlockchain.methods.workList(id).call();
-      console.log(data);
-      setWork(data);
-    }
-
     const getMetadata = async () => {
       let data = await fetch(`https://ipfs.io/ipfs/${cid}/metadata.json`);
       data = await data.json();
@@ -57,7 +51,8 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
       const temp = [];
       for (let i = 1; i <= codeCount; i++) {
         const code = await codeworkNFTBlockchain.methods.codeworkList(i).call();
-        if(code.workId === id) temp.push(code);
+        console.log(code);
+        if(code.workId === cid) temp.push(code);
       }
       console.log(temp)
       setUserWorks(temp);
@@ -68,7 +63,6 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
       getImages();
     }
     if(codeworkNFTBlockchain){
-      getWork();
       getUserWorks();
     }
   }, [cid, id, codeworkNFTBlockchain]);
@@ -130,7 +124,7 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
       <CodeModal
         open={open}
         setOpen={setOpen}
-        id={id}
+        cid={cid}
         walletAddress={walletAddress}
         codeworkNFTBlockchain={codeworkNFTBlockchain}
         userWorks={userWorks}

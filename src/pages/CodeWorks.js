@@ -76,7 +76,7 @@ function CodeWorks() {
                             {work.description}
                           </Card.Description>
                           <div style={{marginTop: '.7rem'}}>
-                            <Button color='violet' as={Link} to={`/works/${work.cid}/${index + 1}`}>
+                            <Button color='violet' as={Link} to={`/works/${work.cid}`}>
                               View
                             </Button>
                           </div>

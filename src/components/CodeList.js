@@ -11,7 +11,7 @@ function CodeList({ code, walletAddress, payCoder, codeworkNFTBlockchain }) {
       setHash(data);
     }
 
-    if(codeworkNFTBlockchain) getHash();
+    if(codeworkNFTBlockchain && code.nftId) getHash();
   }, [code, codeworkNFTBlockchain])
   return (
     <Grid.Column key={code.codeId} style={{marginBottom: '1rem'}}>

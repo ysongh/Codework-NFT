@@ -7,7 +7,7 @@ contract CodeworkNFT is ERC721 {
 
   struct CodeWork {
     uint codeId;
-    uint workId;
+    string workId;
     uint nftId;
     uint date;
     uint price;
@@ -17,7 +17,7 @@ contract CodeworkNFT is ERC721 {
 
   event CodeWorkSubmit (
     uint codeId,
-    uint workId,
+    string workId,
     string codeURL,
     uint date,
     uint price,
@@ -27,14 +27,14 @@ contract CodeworkNFT is ERC721 {
    event Payment (
     address from,
     address to,
-    uint workId,
+    string workId,
     uint codeId,
     uint amount
   );
 
   constructor() ERC721("Codework NFT", "CWN")  public {}
 
-  function addCodeToWork(uint _workId, uint _price, string memory _codeURL) external {
+  function addCodeToWork(string memory _workId, uint _price, string memory _codeURL) external {
     uint _tokenId = totalSupply().add(1);
     _safeMint(msg.sender, _tokenId);
     _setTokenURI(_tokenId, _codeURL);

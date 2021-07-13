@@ -35,7 +35,7 @@ contract('Codework NFT', ([deployer, account1, account2]) => {
     it('add code work', async() => {
       const event = result.logs[1].args;
       assert.equal(event.codeId.toNumber(), codeCount, 'Code Id is correct');
-      assert.equal(event.workId.toNumber(), workId, 'Work Id is correct');
+      assert.equal(event.workId, workId, 'Work Id is correct');
       assert.equal(event.codeURL, codeURL, 'Code URL is correct');
       assert.equal(event.price, price, 'Price is correct');
       assert.equal(event.from, account1, 'Owner address is correct');
