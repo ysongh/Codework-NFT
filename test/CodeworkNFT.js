@@ -19,25 +19,6 @@ contract('Codework NFT', ([deployer, account1, account2]) => {
     });
   });
 
-  describe('work', async() => {
-    let result;
-    let worksCount;
-
-    const metadataURL = "hi2h99shji2jhr3oi2";
-
-    before(async() => {
-        result = await contract.createWork(metadataURL, { from: account1 });
-        worksCount = await contract.worksCount();
-    });
-
-    it('create work', async() => {
-        const event = result.logs[0].args;
-        assert.equal(event.workId.toNumber(), worksCount, 'Id is correct');
-        assert.equal(event.metadataURL, metadataURL, 'Metadata URL is correct');
-        assert.equal(event.from, account1, 'Owner address is correct');
-    });
-  });
-
   describe('code work', async() => {
     let result;
     let codeCount;
@@ -107,11 +88,6 @@ contract('Codework NFT', ([deployer, account1, account2]) => {
       assert.equal(event.workId, workId, 'Work Id is correct');
       assert.equal(event.codeId, codeId, 'Code Id is correct');
       assert.equal(event.amount.toString(), web3.utils.toWei(codeData.price.toString(), 'Ether'), 'Amount is correct');
-    });
-
-    it('set work completed to true', async() => {
-        let code = await contract.workList(workId);
-        assert.equal(code.isCompleted, true);
     });
 
     it('set from completed to the payer', async() => {
