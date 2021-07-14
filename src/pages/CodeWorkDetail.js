@@ -112,6 +112,7 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
         <Grid.Row>
           {userWorks.map(code => (
             <CodeList
+              key={code.codeId}
               code={code}
               walletAddress={walletAddress}
               payCoder={payCoder}

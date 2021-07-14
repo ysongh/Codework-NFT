@@ -21,7 +21,8 @@ contract CodeworkNFT is ERC721 {
     string codeURL,
     uint date,
     uint price,
-    address payable from
+    address payable from,
+    address payable viewer
   );
 
    event Payment (
@@ -42,7 +43,7 @@ contract CodeworkNFT is ERC721 {
     codeCount++;
     codeworkList[codeCount] = CodeWork(codeCount, _workId, _tokenId, now, _price, msg.sender, msg.sender);
     
-    emit CodeWorkSubmit(codeCount, _workId, _codeURL, now, _price, msg.sender);
+    emit CodeWorkSubmit(codeCount, _workId, _codeURL, now, _price, msg.sender, msg.sender);
   }
 
   function payCode(uint _codeId) external payable {

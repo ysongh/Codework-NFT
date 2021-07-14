@@ -39,6 +39,7 @@ contract('Codework NFT', ([deployer, account1, account2]) => {
       assert.equal(event.codeURL, codeURL, 'Code URL is correct');
       assert.equal(event.price, price, 'Price is correct');
       assert.equal(event.from, account1, 'Owner address is correct');
+      assert.equal(event.viewer, account1, 'Viewer address is correct');
     });
 
     it('mints NFT for coder', async () => {
