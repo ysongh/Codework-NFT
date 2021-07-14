@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Container, Grid, Card, Button } from 'semantic-ui-react';
-import moment from 'moment';
 
 import { NFTStorageAPIKey } from '../config';
 import CodeModal from '../components/CodeModal';
@@ -11,7 +10,6 @@ import ImageList from '../components/ImageList';
 
 function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
   const { cid, id } = useParams();
-  const [work, setWork] = useState({});
   const [metadata, setMetadata] = useState({});
   const [imageHashes, setImageHashes] = useState([]);
   const [userWorks, setUserWorks] = useState([]);
@@ -81,7 +79,6 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
         <Card.Content>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <h2>{metadata.name}</h2>
-            <p>{moment.unix(work.date).format('M/D/Y h:mm:ss A')}</p>
           </div>
           <Card.Description>
             {metadata.description}
@@ -99,7 +96,6 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
             <Button color="violet" onClick={() => setOpen(true)}>
               Add your code
             </Button>
-            {work.isCompleted && <p>Completed</p>}
           </div>
         </Card.Content>
       </Card>
