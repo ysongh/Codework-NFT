@@ -104,19 +104,24 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
       <hr />
       <br />
 
-      <Grid columns={3} doubling>
-        <Grid.Row>
-          {userWorks.map(code => (
-            <CodeList
-              key={code.codeId}
-              code={code}
-              walletAddress={walletAddress}
-              payCoder={payCoder}
-              codeworkNFTBlockchain={codeworkNFTBlockchain}
-            />
-          ))}
-        </Grid.Row>
-      </Grid>
+      {!codeworkNFTBlockchain 
+        ? <p>Connect to your ethereum wallet to see submissions</p>
+        : <Grid columns={3} doubling>
+            <Grid.Row>
+              {userWorks.length 
+                ? userWorks.map(code => (
+                    <CodeList
+                      key={code.codeId}
+                      code={code}
+                      walletAddress={walletAddress}
+                      payCoder={payCoder}
+                      codeworkNFTBlockchain={codeworkNFTBlockchain}
+                    />
+                  ))
+                : <p style={{marginLeft: '14px', marginTop: '7px'}}>No submission yet</p>}
+            </Grid.Row>
+          </Grid>
+      }
       
       <CodeModal
         open={open}
