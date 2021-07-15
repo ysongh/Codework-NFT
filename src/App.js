@@ -30,16 +30,17 @@ function App() {
     const web3 = window.web3;
 
     const netId = await web3.eth.net.getId();
-    const accounts = await web3.eth.getAccounts();
+    const netData = CodeworkNFT.networks[netId];
 
-    setAccount(accounts[0]);
+    if(netData){
+      const accounts = await web3.eth.getAccounts();
+      setAccount(accounts[0]);
 
-    if(netId){
       const codeworkNFT = new web3.eth.Contract(CodeworkNFT.abi, CodeworkNFT.networks[netId].address);
       setCodeworkNFTBlockchain(codeworkNFT);
     }
     else{
-      window.alert('Contract is not deployed to detected network')
+      window.alert('Contract is not deployed to detected network, Please try Kovan Test Network')
     }
   }
 
