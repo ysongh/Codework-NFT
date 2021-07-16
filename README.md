@@ -26,4 +26,9 @@ export const NFTStorageAPIKey = "Create API key from nft.storage";
 export const fleekAPIKey = "Create API key from fleek-storage";
 export const fleekAPISecret = "Create API key from fleek-storage";
 ```
+- Create a file called '.env' on the root folder and add the following code
+```
+MNEMONIC=< Your mnemonic >
+INFURA_ENDPOINT=< Your infura endpoint>
+```
 - Run `npm start` to start the dapp

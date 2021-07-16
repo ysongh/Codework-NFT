@@ -1,5 +1,6 @@
+require('dotenv').config();
 const HDWalletProvider = require('@truffle/hdwallet-provider');
-const mnemonic = "".toString().trim();
+const mnemonic = process.env.MNEMONIC.toString().trim();
 
 module.exports = {
   networks: {
@@ -10,7 +11,7 @@ module.exports = {
     },
     // truffle migrate --network kovan
     kovan: {
-      provider: () => new HDWalletProvider(mnemonic, `https://kovan.infura.io/v3/<key>`),
+      provider: () => new HDWalletProvider(mnemonic, `https://kovan.infura.io/v3/${process.env.INFURA_ENDPOINT}`),
       network_id: 42,
       confirmations: 2,
       timeoutBlocks: 200,
