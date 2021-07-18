@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Menu, Button } from 'semantic-ui-react';
 
 function Navbar({ loadBlockchain, walletAddress, setAccount }) {
+  const [activeItem, setActiveItem] = useState('Home');
+  
   return (
     <Menu color="violet" inverted pointing>
       <Container>
         <Menu.Item
           as={Link}
           to="/"
+          onClick={() => setActiveItem('Home')}
         >
           <img src='/logo.png' style={{ width: '10rem'}} alt="Logo" />
         </Menu.Item>
@@ -17,11 +20,15 @@ function Navbar({ loadBlockchain, walletAddress, setAccount }) {
           as={Link}
           to="/"
           name='Home'
+          active={activeItem === 'Home'}
+          onClick={() => setActiveItem('Home')}
         />
         <Menu.Item
           as={Link}
           to="/addform"
           name='Add Work'
+          active={activeItem === 'Add Work'}
+          onClick={() => setActiveItem('Add Work')}
         />
         {walletAddress ? (
           <Menu.Menu position='right'>
