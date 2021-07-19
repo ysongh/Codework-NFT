@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid } from 'semantic-ui-react';
+import { Grid, Image } from 'semantic-ui-react';
 
 function ImageList({ hash, cid, setCurrentImage, setOpenImageModal }) {
   const handelClick = () => {
@@ -8,7 +8,10 @@ function ImageList({ hash, cid, setCurrentImage, setOpenImageModal }) {
   }
   return (
     <Grid.Column className="cursor-pointer" onClick={handelClick}>
-      <img src={`https://ipfs.io/ipfs/${cid}/${hash}`} alt="Design" />
+      <Image
+        src={`https://ipfs.io/ipfs/${cid}/${hash}`}
+        label={{ as: 'a', corner: 'right', icon: 'zoom-in' }}
+        alt="Design" />
     </Grid.Column>
   )
 }
