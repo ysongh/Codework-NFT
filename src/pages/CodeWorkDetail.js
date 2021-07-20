@@ -92,11 +92,10 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
             </Grid.Row>
           </Grid>
           <br />
-          <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+          {codeworkNFTBlockchain &&
             <Button color="violet" onClick={() => setOpen(true)}>
               Add your code
-            </Button>
-          </div>
+            </Button>}
         </Card.Content>
       </Card>
 
