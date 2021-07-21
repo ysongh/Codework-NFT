@@ -82,8 +82,11 @@ function AddForm() {
               {images.map((image, index) => (
                 <div key={index} className="flex-space-between">
                   <p>{image.fileName}</p>
-                  <Button icon color="red" onClick={() => removeFile(image.fileName)}>
-                    <Icon name='trash' />
+                  <Button color="red" onClick={() => removeFile(image.fileName)} animated>
+                    <Button.Content hidden>Remove</Button.Content>
+                    <Button.Content visible>
+                      <Icon name='trash' />
+                    </Button.Content>
                   </Button>
                 </div>
                 
