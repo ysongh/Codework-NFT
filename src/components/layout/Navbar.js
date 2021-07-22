@@ -2,9 +2,13 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Menu, Button } from 'semantic-ui-react';
 
-function Navbar({ loadBlockchain, walletAddress, setAccount }) {
+function Navbar({ loadBlockchain, walletAddress, setAccount, setCodeworkNFTBlockchain }) {
   const [activeItem, setActiveItem] = useState('Home');
   
+  const logout = () => {
+    setAccount('');
+    setCodeworkNFTBlockchain(null);
+  }
   return (
     <Menu color="violet" inverted pointing>
       <Container>
@@ -36,7 +40,7 @@ function Navbar({ loadBlockchain, walletAddress, setAccount }) {
               <p>{walletAddress.substring(0,8)}...{walletAddress.substring(34,42)}</p>
             </Menu.Item>
             <Menu.Item>
-              <Button color="red" onClick={() => setAccount('')}>Disconnect</Button>
+              <Button color="red" onClick={logout}>Disconnect</Button>
             </Menu.Item>
           </Menu.Menu>
         ) : (

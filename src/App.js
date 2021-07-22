@@ -49,7 +49,8 @@ function App() {
       <Navbar
         loadBlockchain={loadBlockchain}
         walletAddress={account}
-        setAccount={setAccount} />
+        setAccount={setAccount}
+        setCodeworkNFTBlockchain={setCodeworkNFTBlockchain} />
       <Switch>
         <Route path="/addform">
           <AddForm />
