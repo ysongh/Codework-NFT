@@ -8,9 +8,9 @@
 .btn-file {
     background-color: #6435c9;
     color: #fff !important;
-    width: 5.5rem;
+    width: 3.1rem;
     font-size: 1rem !important;
-    padding: .8rem 1rem;
+    padding: .8rem 1rem .5rem .8rem;
     border-radius: 5px;
     cursor: pointer;
     display: inline-block;

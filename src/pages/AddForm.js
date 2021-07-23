@@ -65,7 +65,7 @@ function AddForm() {
     <Container className="bodyHeight">
       <Card centered style={{ width: '600px'}} color='purple'>
         <Card.Content>
-          <h1 style={{ fontSize: '1.8rem'}}>Need something to be build developers?</h1>
+          <h1 style={{ fontSize: '1.8rem'}}>Need something to be build by developers?</h1>
           <p style={{ fontSize: '1rem', color: 'gray', marginBottom: '2rem' }}>
             Fill the details below
           </p>
@@ -74,11 +74,16 @@ function AddForm() {
               <label>Title</label>
               <input value={name} onChange={(e) => setName(e.target.value)} />
             </Form.Field>
+
             <Form.Field>
               <label>Upload files</label>
-              <label htmlFor="img" className="btn-file">Upload</label>
+              <label htmlFor="img" className="btn-file">
+                <Icon name='upload' style={{ fontSize: '1.25rem'}} />
+              </label>
               <input id="img" type="file" onChange={getImage} style={{ display: 'none' }}/>
+
               <div style={{ marginBottom: "1rem" }}></div>
+
               {images.map((image, index) => (
                 <div key={index} className="flex-space-between">
                   <p>{image.fileName}</p>
@@ -89,20 +94,21 @@ function AddForm() {
                     </Button.Content>
                   </Button>
                 </div>
-                
               ))}
             </Form.Field>
+
             <Form.TextArea
               label='Description'
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Any requirements on what you need" />
+
             <Button
               type='submit'
               color="violet"
               onClick={upload}
             >
-              Create
+              Create Post
             </Button>
             
             {loading && <Spinner text="Creating..." />}
