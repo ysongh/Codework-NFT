@@ -21,6 +21,7 @@ function CodeList({ code, walletAddress, payCoder, codeworkNFTBlockchain }) {
             {code.from.substring(0,8)}...{code.from.substring(34,42)}
           </Card.Description>
           <Card.Meta>Owner</Card.Meta>
+          <p style={{marginTop: '.5rem'}}>{code.email}</p>
           <br />
           <Card.Header>{window.web3.utils.fromWei(code.price, 'Ether')} ETH</Card.Header>
         </Card.Content>

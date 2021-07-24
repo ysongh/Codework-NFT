@@ -26,9 +26,10 @@ contract('Codework NFT', ([deployer, account1, account2]) => {
     const workId = "1";
     const price = "1";
     const codeURL = "hi2h99shji2jhr3oi2";
+    const email = "codeworknft@gmail.com";
 
     before(async() => {
-      result = await contract.addCodeToWork(workId, price, codeURL, { from: account1 });
+      result = await contract.addCodeToWork(workId, price, codeURL, email, { from: account1 });
       codeCount = await contract.codeCount();
     });
 
@@ -38,6 +39,7 @@ contract('Codework NFT', ([deployer, account1, account2]) => {
       assert.equal(event.workId, workId, 'Work Id is correct');
       assert.equal(event.codeURL, codeURL, 'Code URL is correct');
       assert.equal(event.price, price, 'Price is correct');
+      assert.equal(event.email, email, 'Email is correct');
       assert.equal(event.from, account1, 'Owner address is correct');
       assert.equal(event.viewer, account1, 'Viewer address is correct');
     });

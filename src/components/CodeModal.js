@@ -8,6 +8,7 @@ import Spinner from './common/Spinner';
 function CodeModal({ open, setOpen, cid, walletAddress, codeworkNFTBlockchain, userWorks, setUserWorks }) {
   const [price, setPrice] = useState('');
   const [image, setImage] = useState('');
+  const [email, setEmail] = useState('');
   const [imageName, setImageName] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -30,7 +31,7 @@ function CodeModal({ open, setOpen, cid, walletAddress, codeworkNFTBlockchain, u
       console.log(uploadedFile.key);
 
       const event = await codeworkNFTBlockchain.methods
-        .addCodeToWork(cid, window.web3.utils.toWei(price, 'Ether'), uploadedFile.key)
+        .addCodeToWork(cid, window.web3.utils.toWei(price, 'Ether'), uploadedFile.key, email)
         .send({ from: walletAddress });
     
       console.log(event);
@@ -59,6 +60,10 @@ function CodeModal({ open, setOpen, cid, walletAddress, codeworkNFTBlockchain, u
           <Form.Field>
             <label>Price (ETH)</label>
             <input value={price} onChange={(e) => setPrice(e.target.value)} />
+          </Form.Field>
+          <Form.Field>
+            <label>Email</label>
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
           </Form.Field>
           <Form.Field>
             <label>Code (in html file)</label>
