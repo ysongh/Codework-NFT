@@ -76,7 +76,7 @@ function AddForm() {
             </Form.Field>
 
             <Form.Field>
-              <label>Upload files</label>
+              <label>Upload images</label>
               <label htmlFor="img" className="btn-file">
                 <Icon name='upload' style={{ fontSize: '1.25rem'}} />
               </label>

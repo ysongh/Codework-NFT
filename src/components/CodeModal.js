@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Modal, Form } from 'semantic-ui-react';
+import { Button, Modal, Form, Input, Label, Icon } from 'semantic-ui-react';
 import fleekStorage from '@fleekhq/fleek-storage-js'
 
 import { fleekAPIKey, fleekAPISecret } from '../config';
@@ -59,7 +59,11 @@ function CodeModal({ open, setOpen, cid, walletAddress, codeworkNFTBlockchain, u
         <Form>
           <Form.Field>
             <label>Price (ETH)</label>
-            <input value={price} onChange={(e) => setPrice(e.target.value)} />
+            <Input labelPosition='right'>
+              <Label basic><Icon name='ethereum' /></Label>
+              <input value={price} onChange={(e) => setPrice(e.target.value)} />
+              <Label>ETH</Label>
+            </Input>
           </Form.Field>
           <Form.Field>
             <label>Email</label>
