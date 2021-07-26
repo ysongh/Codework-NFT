@@ -11,7 +11,8 @@ function CodeModal({ open, setOpen, cid, walletAddress, codeworkNFTBlockchain, u
   const [email, setEmail] = useState('');
   const [imageName, setImageName] = useState('');
   const [loading, setLoading] = useState(false);
-
+  const [errors, setErrors] = useState({});
+  
   const getImage = event => {
     const file = event.target.files[0];
     console.log(file);
@@ -21,6 +22,14 @@ function CodeModal({ open, setOpen, cid, walletAddress, codeworkNFTBlockchain, u
 
   const upload = async () => {
     try{
+      setErrors({});
+      
+
+      if(!price){
+        setErrors({price: true});
+        return;
+      }
+
       setLoading(true);
       const uploadedFile = await fleekStorage.upload({
         apiKey: fleekAPIKey,
@@ -58,11 +67,14 @@ function CodeModal({ open, setOpen, cid, walletAddress, codeworkNFTBlockchain, u
       <Modal.Content>
         <Form>
           <Form.Field>
-            <label>Price (ETH)</label>
+            <label>Price (ETH) *</label>
             <Input labelPosition='right'>
               <Label basic><Icon name='ethereum' /></Label>
-              <input value={price} onChange={(e) => setPrice(e.target.value)} />
+              <input text="number" value={price} onChange={(e) => setPrice(e.target.value)} />
               <Label>ETH</Label>
+              {errors.price && <Label basic color='red' pointing='left'>
+                Please enter a value
+              </Label>}
             </Input>
           </Form.Field>
           <Form.Field>

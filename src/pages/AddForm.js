@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { NFTStorage, File } from 'nft.storage';
-import { Container, Card, Form, Button, Icon } from 'semantic-ui-react';
+import { Container, Card, Form, Label, Button, Icon } from 'semantic-ui-react';
 
 import { NFTStorageAPIKey } from '../config';
 import Spinner from '../components/common/Spinner';
@@ -14,6 +14,7 @@ function AddForm() {
   const [description, setDescription] = useState('');
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const getImage = event => {
     const file = event.target.files[0];
@@ -28,6 +29,17 @@ function AddForm() {
 
   const upload = async () => {
     try{
+      setErrors({});
+
+      if(!name){
+        setErrors({name: true});
+        return;
+      }
+      if(!description){
+        setErrors({description: true});
+        return;
+      }
+
       setLoading(true);
       console.log(images);
 
@@ -71,8 +83,11 @@ function AddForm() {
           </p>
           <Form>
             <Form.Field>
-              <label>Title</label>
+              <label>Title *</label>
               <input value={name} onChange={(e) => setName(e.target.value)} />
+              {errors.name && <Label basic color='red' pointing>
+                Please enter a title
+              </Label>}
             </Form.Field>
 
             <Form.Field>
@@ -97,12 +112,17 @@ function AddForm() {
               ))}
             </Form.Field>
 
-            <Form.TextArea
-              label='Description'
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              placeholder="Any requirements on what you need" />
-
+            <Form.Field>
+              <Form.TextArea
+                label='Description'
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                placeholder="Any requirements on what you need *" />
+              {errors.description && <Label basic color='red' pointing style={{ marginTop: '0' }}>
+                Please enter a detail of what you need
+              </Label>}
+            </Form.Field>
+            
             <Button
               type='submit'
               color="violet"
