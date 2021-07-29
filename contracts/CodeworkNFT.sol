@@ -4,6 +4,7 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 contract CodeworkNFT is ERC721 {
   uint public codeCount = 0;
   mapping(uint => CodeWork) public codeworkList;
+  mapping(uint => string) private secretCodeList;
 
   struct CodeWork {
     uint codeId;
@@ -19,7 +20,7 @@ contract CodeworkNFT is ERC721 {
   event CodeWorkSubmit (
     uint codeId,
     string workId,
-    string codeURL,
+    string previewURL,
     uint date,
     uint price,
     string email,
@@ -37,15 +38,17 @@ contract CodeworkNFT is ERC721 {
 
   constructor() ERC721("Codework NFT", "CWN")  public {}
 
-  function addCodeToWork(string memory _workId, uint _price, string memory _codeURL, string memory _email) external {
+  function addCodeToWork(string memory _workId, uint _price, string memory _previewURL, string memory _email,  string memory _codeURL) external {
     uint _tokenId = totalSupply().add(1);
     _safeMint(msg.sender, _tokenId);
-    _setTokenURI(_tokenId, _codeURL);
+    _setTokenURI(_tokenId, _previewURL);
 
     codeCount++;
     codeworkList[codeCount] = CodeWork(codeCount, _workId, _tokenId, now, _price, _email, msg.sender, msg.sender);
     
-    emit CodeWorkSubmit(codeCount, _workId, _codeURL, now, _price, _email, msg.sender, msg.sender);
+    secretCodeList[codeCount] = _codeURL;
+    
+    emit CodeWorkSubmit(codeCount, _workId, _previewURL, now, _price, _email, msg.sender, msg.sender);
   }
 
   function payCode(uint _codeId) external payable {
@@ -56,5 +59,12 @@ contract CodeworkNFT is ERC721 {
     codeworkList[_codeId] = _codeWork;
 
     emit Payment(msg.sender, _codeWork.from, _codeWork.workId, _codeId, msg.value);
+  }
+
+  function getCodeURLByNFTId(uint _codeId) public view returns (string memory) {
+    CodeWork memory _codeWork = codeworkList[_codeId];
+    require(_codeWork.viewer != msg.sender);
+
+    return secretCodeList[_codeId];
   }
 }

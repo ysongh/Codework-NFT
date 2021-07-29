@@ -25,11 +25,12 @@ contract('Codework NFT', ([deployer, account1, account2]) => {
 
     const workId = "1";
     const price = "1";
+    const previewURL = "ijif239fmuew9fm2983f2m";
     const codeURL = "hi2h99shji2jhr3oi2";
     const email = "codeworknft@gmail.com";
 
     before(async() => {
-      result = await contract.addCodeToWork(workId, price, codeURL, email, { from: account1 });
+      result = await contract.addCodeToWork(workId, price, previewURL, email, codeURL, { from: account1 });
       codeCount = await contract.codeCount();
     });
 
@@ -37,7 +38,7 @@ contract('Codework NFT', ([deployer, account1, account2]) => {
       const event = result.logs[1].args;
       assert.equal(event.codeId.toNumber(), codeCount, 'Code Id is correct');
       assert.equal(event.workId, workId, 'Work Id is correct');
-      assert.equal(event.codeURL, codeURL, 'Code URL is correct');
+      assert.equal(event.previewURL, previewURL, 'Preview URL is correct');
       assert.equal(event.price, price, 'Price is correct');
       assert.equal(event.email, email, 'Email is correct');
       assert.equal(event.from, account1, 'Owner address is correct');
@@ -55,8 +56,13 @@ contract('Codework NFT', ([deployer, account1, account2]) => {
       assert.equal(result.toString(), account1.toString(), 'Coder got a NFT');
 
       result = await contract.tokenURI('1');
-      assert.equal(result.toString(), codeURL, 'NFT URI is correct');
-    })
+      assert.equal(result.toString(), previewURL, 'NFT URI is correct');
+    });
+
+    it('get code by NFT Id', async () => {
+      result = await contract.getCodeURLByNFTId(codeCount);
+      assert.equal(result.toString(), codeURL, 'Code URL is correct');
+    });
   });
 
   describe('pay coder', async() => {
