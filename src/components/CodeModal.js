@@ -7,17 +7,26 @@ import Spinner from './common/Spinner';
 
 function CodeModal({ open, setOpen, cid, walletAddress, codeworkNFTBlockchain, userWorks, setUserWorks }) {
   const [price, setPrice] = useState('');
-  const [image, setImage] = useState('');
+  const [previewFile, setPreviewFile] = useState('');
+  const [previewFileName, setPreviewFileName] = useState('');
+  const [codeFile, setCodeFile] = useState('');
+  const [codeFileName, setCodeFileName] = useState('');
   const [email, setEmail] = useState('');
-  const [imageName, setImageName] = useState('');
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
   
-  const getImage = event => {
+  const getPreviewFile = event => {
     const file = event.target.files[0];
     console.log(file);
-    setImage(file);
-    setImageName(file.name);
+    setPreviewFile(file);
+    setPreviewFileName(file.name);
+  }
+
+  const getCodeFile = event => {
+    const file = event.target.files[0];
+    console.log(file);
+    setCodeFile(file);
+    setCodeFileName(file.name);
   }
 
   const upload = async () => {
@@ -31,16 +40,24 @@ function CodeModal({ open, setOpen, cid, walletAddress, codeworkNFTBlockchain, u
       }
 
       setLoading(true);
-      const uploadedFile = await fleekStorage.upload({
+      const uploadedPreviewFile = await fleekStorage.upload({
         apiKey: fleekAPIKey,
         apiSecret: fleekAPISecret,
-        key: walletAddress + '/' + imageName,
-        data: image
+        key: walletAddress + '/' + previewFileName,
+        data: previewFile
       });
-      console.log(uploadedFile.key);
+      console.log(uploadedPreviewFile.key);
+
+      const uploadedCodeFile = await fleekStorage.upload({
+        apiKey: fleekAPIKey,
+        apiSecret: fleekAPISecret,
+        key: walletAddress + '/' + codeFileName,
+        data: codeFile
+      });
+      console.log(uploadedCodeFile.key);
 
       const event = await codeworkNFTBlockchain.methods
-        .addCodeToWork(cid, window.web3.utils.toWei(price, 'Ether'), uploadedFile.key, email)
+        .addCodeToWork(cid, window.web3.utils.toWei(price, 'Ether'), uploadedPreviewFile.key, email, uploadedCodeFile.key)
         .send({ from: walletAddress });
     
       console.log(event);
@@ -82,8 +99,12 @@ function CodeModal({ open, setOpen, cid, walletAddress, codeworkNFTBlockchain, u
             <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
           </Form.Field>
           <Form.Field>
+            <label>Preview of your work (Image)</label>
+            <input type="file" onChange={getPreviewFile} />
+          </Form.Field>
+          <Form.Field>
             <label>Code (in html file)</label>
-            <input type="file" onChange={getImage} />
+            <input type="file" onChange={getCodeFile} />
           </Form.Field>
         </Form>
       </Modal.Content>

@@ -23,7 +23,7 @@ contract('Codework NFT', ([deployer, account1, account2]) => {
     let result;
     let codeCount;
 
-    const workId = "1";
+    const workId = "rjoi2jff23oi";
     const price = "1";
     const previewURL = "ijif239fmuew9fm2983f2m";
     const codeURL = "hi2h99shji2jhr3oi2";
@@ -68,8 +68,8 @@ contract('Codework NFT', ([deployer, account1, account2]) => {
   describe('pay coder', async() => {
     let result;
     let codeData;
-    let workId = 1;
-    let codeId = 1;
+    const workId = "rjoi2jff23oi";
+    const codeId = 1;
     
     before(async() => {
       codeData = await contract.codeworkList(1);
@@ -100,7 +100,7 @@ contract('Codework NFT', ([deployer, account1, account2]) => {
     });
 
     it('set from completed to the payer', async() => {
-      let code = await contract.codeworkList(workId);
+      let code = await contract.codeworkList(codeId);
       assert.equal(code.viewer, account2);
     });
   });
