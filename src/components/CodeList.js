@@ -30,7 +30,7 @@ function CodeList({ code, walletAddress, payCoder, codeworkNFTBlockchain }) {
             <a
               target="_blank"
               rel="noopener noreferrer"
-              href={"https://storageapi.fleek.co/ysongh-69207-team-bucket/" + hash}
+              href={"https://ipfs.fleek.co/ipfs/" + hash}
             >
               <Button basic color='violet' fluid>
                 See Work

@@ -46,7 +46,7 @@ function CodeModal({ open, setOpen, cid, walletAddress, codeworkNFTBlockchain, u
         key: walletAddress + '/' + previewFileName,
         data: previewFile
       });
-      console.log(uploadedPreviewFile.key);
+      console.log(uploadedPreviewFile);
 
       const uploadedCodeFile = await fleekStorage.upload({
         apiKey: fleekAPIKey,
@@ -54,10 +54,10 @@ function CodeModal({ open, setOpen, cid, walletAddress, codeworkNFTBlockchain, u
         key: walletAddress + '/' + codeFileName,
         data: codeFile
       });
-      console.log(uploadedCodeFile.key);
+      console.log(uploadedCodeFile);
 
       const event = await codeworkNFTBlockchain.methods
-        .addCodeToWork(cid, window.web3.utils.toWei(price, 'Ether'), uploadedPreviewFile.key, email, uploadedCodeFile.key)
+        .addCodeToWork(cid, window.web3.utils.toWei(price, 'Ether'), uploadedPreviewFile.hash, email, uploadedCodeFile.hash)
         .send({ from: walletAddress });
     
       console.log(event);
