@@ -103,7 +103,7 @@ function CodeModal({ open, setOpen, cid, walletAddress, codeworkNFTBlockchain, u
             <input type="file" onChange={getPreviewFile} />
           </Form.Field>
           <Form.Field>
-            <label>Code (in html file)</label>
+            <label>Code (Zip)</label>
             <input type="file" onChange={getCodeFile} />
           </Form.Field>
         </Form>

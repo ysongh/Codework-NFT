@@ -2,16 +2,26 @@ import React , { useEffect, useState } from 'react';
 import { Grid, Card, Button } from 'semantic-ui-react';
 
 function CodeList({ code, walletAddress, payCoder, codeworkNFTBlockchain }) {
-  const [hash, setHash] = useState('');
+  const [previewHash, setPreviewHash] = useState('');
+  const [codeHash, setCodeHash] = useState('');
 
   useEffect(() => {
-    const getHash = async () => {
+    const getPreviewFileHash = async () => {
       const data = await codeworkNFTBlockchain.methods.tokenURI(code.nftId).call();
       console.log(data);
-      setHash(data);
+      setPreviewHash(data);
     }
 
-    if(codeworkNFTBlockchain && code.nftId) getHash();
+    const getCodeHash = async () => {
+      const data = await codeworkNFTBlockchain.methods.getCodeURLByNFTId(code.nftId).call();
+      console.log(data);
+      setCodeHash(data);
+    }
+
+    if(codeworkNFTBlockchain && code.nftId){
+      getPreviewFileHash();
+      getCodeHash();
+    }
   }, [code, codeworkNFTBlockchain])
   return (
     <Grid.Column key={code.codeId} style={{marginBottom: '1rem'}}>
@@ -26,21 +36,32 @@ function CodeList({ code, walletAddress, payCoder, codeworkNFTBlockchain }) {
           <Card.Header>{window.web3.utils.fromWei(code.price, 'Ether')} ETH</Card.Header>
         </Card.Content>
         <Card.Content extra>
-          {code.viewer === walletAddress ? (
+          <div className='ui two buttons'>
             <a
               target="_blank"
               rel="noopener noreferrer"
-              href={"https://ipfs.fleek.co/ipfs/" + hash}
+              href={"https://ipfs.fleek.co/ipfs/" + previewHash}
             >
               <Button basic color='violet' fluid>
                 See Work
               </Button>
             </a>
-          ) : (
-          <Button basic color='teal' onClick={() => payCoder(code.codeId, code.price)} fluid>
-            Pay to get code
-          </Button>
-          )}
+            {code.viewer === walletAddress ? (
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href={"https://ipfs.fleek.co/ipfs/" + codeHash}
+              >
+                <Button basic color='teal' fluid>
+                  Download Code
+                </Button>
+              </a>
+            ) : (
+            <Button basic color='teal' onClick={() => payCoder(code.codeId, code.price)} fluid>
+              Pay to get code
+            </Button>
+            )}
+          </div>
         </Card.Content>
       </Card>
     </Grid.Column>
