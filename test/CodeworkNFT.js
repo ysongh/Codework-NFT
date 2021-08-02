@@ -60,7 +60,7 @@ contract('Codework NFT', ([deployer, account1, account2]) => {
     });
 
     it('get code by NFT Id', async () => {
-      result = await contract.getCodeURLByNFTId(codeCount);
+      result = await contract.getCodeURLByNFTId(codeCount, { from: account1 });
       assert.equal(result.toString(), codeURL, 'Code URL is correct');
     });
   });
@@ -70,6 +70,7 @@ contract('Codework NFT', ([deployer, account1, account2]) => {
     let codeData;
     const workId = "rjoi2jff23oi";
     const codeId = 1;
+    const codeURL = "hi2h99shji2jhr3oi2";
     
     before(async() => {
       codeData = await contract.codeworkList(1);
@@ -102,6 +103,12 @@ contract('Codework NFT', ([deployer, account1, account2]) => {
     it('set from completed to the payer', async() => {
       let code = await contract.codeworkList(codeId);
       assert.equal(code.viewer, account2);
+    });
+
+    it('get code by NFT Id for the payer', async () => {
+      result = await contract.getCodeURLByNFTId(codeId, { from: account2 });
+      console.log(result)
+      assert.equal(result.toString(), codeURL, 'Code URL is correct');
     });
   });
 })

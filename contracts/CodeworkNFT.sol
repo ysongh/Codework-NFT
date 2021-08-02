@@ -63,7 +63,7 @@ contract CodeworkNFT is ERC721 {
 
   function getCodeURLByNFTId(uint _codeId) public view returns (string memory) {
     CodeWork memory _codeWork = codeworkList[_codeId];
-    require(_codeWork.viewer != msg.sender);
+    require(_codeWork.viewer == msg.sender, "You do not own this code");
 
     return secretCodeList[_codeId];
   }
