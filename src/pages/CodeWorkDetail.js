@@ -7,6 +7,7 @@ import CodeModal from '../components/CodeModal';
 import ImageModal from '../components/ImageModal';
 import CodeList from '../components/CodeList';
 import ImageList from '../components/ImageList';
+import Spinner from '../components/common/Spinner';
 
 function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
   const { cid, id } = useParams();
@@ -16,6 +17,7 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
   const [open, setOpen] = useState(false);
   const [openImageModal, setOpenImageModal] = useState(false);
   const [currentImage, setCurrentImage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const getMetadata = async () => {
@@ -66,11 +68,18 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
   }, [cid, id, codeworkNFTBlockchain]);
 
   const payCoder = async (codeId, price) => {
-    const data = await codeworkNFTBlockchain.methods
-      .payCode(codeId)
-      .send({ from: walletAddress, value: price });
-    
-    console.log(data);
+    try{
+      setLoading(true);
+      const data = await codeworkNFTBlockchain.methods
+        .payCode(codeId)
+        .send({ from: walletAddress, value: price });
+      
+      console.log(data);
+      setLoading(false);
+    } catch(err) {
+      console.error(err);
+      setLoading(false);
+    }
   }
 
   return (
@@ -115,6 +124,7 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
                       walletAddress={walletAddress}
                       payCoder={payCoder}
                       codeworkNFTBlockchain={codeworkNFTBlockchain}
+                      userWorks={userWorks}
                     />
                   ))
                 : <p style={{marginLeft: '14px', marginTop: '7px'}}>No submission yet</p>}
@@ -135,6 +145,8 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
         openImageModal={openImageModal}
         setOpenImageModal={setOpenImageModal}
         imageURL={currentImage} />
+
+      {loading && <Spinner />}
     </Container>
   )
 }

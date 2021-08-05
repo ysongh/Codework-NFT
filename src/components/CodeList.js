@@ -1,7 +1,7 @@
 import React , { useEffect, useState } from 'react';
 import { Grid, Card, Button } from 'semantic-ui-react';
 
-function CodeList({ code, walletAddress, payCoder, codeworkNFTBlockchain }) {
+function CodeList({ code, walletAddress, payCoder, codeworkNFTBlockchain, userWorks }) {
   const [previewHash, setPreviewHash] = useState('');
   const [codeHash, setCodeHash] = useState('');
 
@@ -22,7 +22,9 @@ function CodeList({ code, walletAddress, payCoder, codeworkNFTBlockchain }) {
       getPreviewFileHash();
       getCodeHash();
     }
-  }, [code, codeworkNFTBlockchain])
+    console.log(previewHash, "previewHash");
+    console.log(codeHash, "codeHash")
+  }, [code, codeworkNFTBlockchain, userWorks])
   return (
     <Grid.Column key={code.codeId} style={{marginBottom: '1rem'}}>
       <Card color='orange'>
