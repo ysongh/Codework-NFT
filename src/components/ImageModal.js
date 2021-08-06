@@ -8,7 +8,7 @@ function ImageModal({ openImageModal, setOpenImageModal, imageURL }) {
       onOpen={() => setOpenImageModal(true)}
       open={openImageModal}
       dimmer='inverted'
-      size="large"
+      size="small"
     >
       <Modal.Content>
         <Image src={imageURL} alt="Design" fluid />
@@ -17,6 +17,15 @@ function ImageModal({ openImageModal, setOpenImageModal, imageURL }) {
         <Button onClick={() => setOpenImageModal(false)}>
           Close
         </Button>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href={imageURL}
+        >
+          <Button color='teal'>
+            View
+          </Button>
+        </a>
       </Modal.Actions>
     </Modal>
   )
