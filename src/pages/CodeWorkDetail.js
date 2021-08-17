@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Container, Grid, Card, Button } from 'semantic-ui-react';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 import { NFTStorageAPIKey } from '../config';
 import CodeModal from '../components/CodeModal';
@@ -89,8 +91,9 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <h2>{metadata.name}</h2>
           </div>
+          <br />
           <Card.Description>
-            {metadata.description}
+            <ReactQuill className="hideToolbar" theme="snow" value={metadata.description} readOnly/>
           </Card.Description>
           <br />
           <Grid columns={4} doubling>

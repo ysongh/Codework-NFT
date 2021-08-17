@@ -33,3 +33,15 @@
 .bodyHeight{
     min-height: 77.1vh;
 }
+
+.text-editor .ql-editor{
+    min-height: 200px;
+}
+
+.hideToolbar .ql-editor{
+    border-top: 1px solid grey;
+}
+
+.hideToolbar .ql-toolbar.ql-snow{
+    display: none;
+}

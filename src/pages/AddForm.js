@@ -5,6 +5,8 @@ import { Container, Card, Form, Label, Button, Icon } from 'semantic-ui-react';
 
 import { NFTStorageAPIKey } from '../config';
 import Spinner from '../components/common/Spinner';
+import TextEditor from '../components/TextEditor';
+
 const apiKey = NFTStorageAPIKey;
 const client = new NFTStorage({ token: apiKey })
 
@@ -112,7 +114,7 @@ function AddForm() {
               ))}
             </Form.Field>
 
-            <Form.Field>
+            {/* <Form.Field>
               <Form.TextArea
                 label='Description'
                 value={description}
@@ -121,6 +123,11 @@ function AddForm() {
               {errors.description && <Label basic color='red' pointing style={{ marginTop: '0' }}>
                 Please enter a detail of what you need
               </Label>}
+            </Form.Field> */}
+
+            <Form.Field>
+              <label>Description</label>
+              <TextEditor description={description} setDescription={setDescription} />
             </Form.Field>
             
             <Button
