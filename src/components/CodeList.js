@@ -22,8 +22,6 @@ function CodeList({ code, walletAddress, payCoder, codeworkNFTBlockchain, userWo
       getPreviewFileHash();
       getCodeHash();
     }
-    console.log(previewHash, "previewHash");
-    console.log(codeHash, "codeHash")
   }, [code, codeworkNFTBlockchain, userWorks])
   return (
     <Grid.Column key={code.codeId} style={{marginBottom: '1rem'}}>

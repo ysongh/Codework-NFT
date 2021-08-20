@@ -72,9 +72,6 @@ function CodeWorks() {
                           <Card.Meta>
                             {dateFormat(work.created, "mmmm dS, yyyy, h:MM:ss TT")}
                           </Card.Meta>
-                          <Card.Description>
-                            {work.description}
-                          </Card.Description>
                           <div style={{marginTop: '.7rem'}}>
                             <Button color='violet' as={Link} to={`/works/${work.cid}`}>
                               View
