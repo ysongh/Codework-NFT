@@ -4,7 +4,7 @@ import { Container, Grid, Message, Card, Button } from 'semantic-ui-react';
 import dateFormat from 'dateformat';
 
 import { NFTStorageAPIKey } from '../config';
-import CardLoading from '../components/common/CardLoading';
+import CardWorkLoading from '../components/common/CardWorkLoading';
 
 function CodeWorks() {
   const [works, setWorks] = useState([]);
@@ -60,22 +60,28 @@ function CodeWorks() {
       
       <h1>List of Bounties</h1>
       {loading
-        ? <CardLoading />
-        : <Grid columns={3} doubling>
+        ? <CardWorkLoading />
+        : <Grid columns={2} doubling>
             <Grid.Row>
               {works.length
                 ? works.map((work, index) => (
                     <Grid.Column key={index} style={{marginBottom: '1rem'}}>
-                      <Card color='orange'>
+                      <Card color='orange' fluid>
                         <Card.Content>
-                          <Card.Header>{work.name}</Card.Header>
-                          <Card.Meta>
-                            {dateFormat(work.created, "mmmm dS, yyyy, h:MM:ss TT")}
-                          </Card.Meta>
-                          <div style={{marginTop: '.7rem'}}>
-                            <Button color='violet' as={Link} to={`/works/${work.cid}`}>
-                              View
-                            </Button>
+                          <div style={{ display: 'flex', justifyContent: 'space-between'}}>
+                            <div>
+                              <Card.Header style={{ fontSize: '1.4rem', marginBottom: '.5rem'}}>
+                                {work.name}
+                              </Card.Header>
+                              <Card.Meta>
+                                {dateFormat(work.created, "mmmm dS, yyyy, h:MM:ss TT")}
+                              </Card.Meta>
+                            </div>
+                            <div>
+                              <Button color='violet' as={Link} to={`/works/${work.cid}`}>
+                                View
+                              </Button>
+                            </div>
                           </div>
                         </Card.Content>
                       </Card>
