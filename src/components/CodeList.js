@@ -1,6 +1,8 @@
 import React , { useEffect, useState } from 'react';
 import { Grid, Card, Button } from 'semantic-ui-react';
 
+import CodeworkNFT from '../abis/CodeworkNFT.json';
+
 function CodeList({ code, walletAddress, payCoder, codeworkNFTBlockchain, userWorks }) {
   const [previewHash, setPreviewHash] = useState('');
   const [codeHash, setCodeHash] = useState('');
@@ -28,7 +30,11 @@ function CodeList({ code, walletAddress, payCoder, codeworkNFTBlockchain, userWo
       <Card color='orange'>
         <Card.Content>
           <Card.Description>
-            {code.from.substring(0,8)}...{code.from.substring(34,42)}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href={`https://kovan.etherscan.io/token/${CodeworkNFT.networks['42'].address}?a=${code.nftId}#inventory`}
+          >{code.from.substring(0,8)}...{code.from.substring(34,42)}</a>
           </Card.Description>
           <Card.Meta>Owner</Card.Meta>
           <p style={{marginTop: '.5rem'}}>{code.email}</p>
