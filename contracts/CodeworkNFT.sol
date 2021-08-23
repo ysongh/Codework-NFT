@@ -1,7 +1,13 @@
-pragma solidity ^0.6.12;
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
 
-contract CodeworkNFT is ERC721 {
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
+
+contract CodeworkNFT is ERC721URIStorage {
+  using Counters for Counters.Counter;
+  Counters.Counter public _tokenIds;
+
   uint public codeCount = 0;
   mapping(uint => CodeWork) public codeworkList;
   mapping(uint => string) private secretCodeList;
@@ -13,8 +19,8 @@ contract CodeworkNFT is ERC721 {
     uint date;
     uint price;
     string email;
-    address payable from;
-    address payable viewer;
+    address from;
+    address viewer;
   }
 
   event CodeWorkSubmit (
@@ -24,8 +30,8 @@ contract CodeworkNFT is ERC721 {
     uint date,
     uint price,
     string email,
-    address payable from,
-    address payable viewer
+    address from,
+    address viewer
   );
 
    event Payment (
@@ -36,25 +42,28 @@ contract CodeworkNFT is ERC721 {
     uint amount
   );
 
-  constructor() ERC721("Codework NFT", "CWN")  public {}
+  constructor() ERC721("Codework NFT", "CWN") {}
 
   function addCodeToWork(string memory _workId, uint _price, string memory _previewURL, string memory _email,  string memory _codeURL) external {
-    uint _tokenId = totalSupply().add(1);
+    _tokenIds.increment();
+    uint _tokenId = _tokenIds.current();
     _safeMint(msg.sender, _tokenId);
     _setTokenURI(_tokenId, _previewURL);
 
+    address _owner = msg.sender;
+
     codeCount++;
-    codeworkList[codeCount] = CodeWork(codeCount, _workId, _tokenId, now, _price, _email, msg.sender, msg.sender);
+    codeworkList[codeCount] = CodeWork(codeCount, _workId, _tokenId, block.timestamp, _price, _email,_owner,_owner);
     
     secretCodeList[codeCount] = _codeURL;
     
-    emit CodeWorkSubmit(codeCount, _workId, _previewURL, now, _price, _email, msg.sender, msg.sender);
+    emit CodeWorkSubmit(codeCount, _workId, _previewURL, block.timestamp, _price, _email,_owner,_owner);
   }
 
   function payCode(uint _codeId) external payable {
     CodeWork memory _codeWork = codeworkList[_codeId];
 
-    _codeWork.from.transfer(msg.value);
+    payable(_codeWork.from).transfer(msg.value);
     _codeWork.viewer = msg.sender;
     codeworkList[_codeId] = _codeWork;
 

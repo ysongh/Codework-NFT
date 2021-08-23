@@ -46,7 +46,7 @@ contract('Codework NFT', ([deployer, account1, account2]) => {
     });
 
     it('mints NFT for coder', async () => {
-      result = await contract.totalSupply();
+      result = await contract._tokenIds();
       assert.equal(result.toString(), '1', 'Total supply is correct');
 
       result = await contract.balanceOf(account1);
