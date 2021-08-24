@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { HashRouter, Switch, Route } from 'react-router-dom';
 import Web3 from 'web3';
 
 import './App.css';
@@ -45,7 +45,7 @@ function App() {
   }
 
   return (
-    <Router className="App">
+    <HashRouter className="App">
       <Navbar
         loadBlockchain={loadBlockchain}
         walletAddress={account}
@@ -65,7 +65,7 @@ function App() {
         </Route>
       </Switch>
       <Footer />
-    </Router>
+    </HashRouter>
   );
 }
 
