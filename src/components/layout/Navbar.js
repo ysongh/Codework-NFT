@@ -10,7 +10,7 @@ function Navbar({ loadBlockchain, walletAddress, setAccount, setCodeworkNFTBlock
     setCodeworkNFTBlockchain(null);
   }
   return (
-    <Menu color="violet" inverted pointing>
+    <Menu color="violet" inverted pointing stackable>
       <Container>
         <Menu.Item
           as={Link}
