@@ -9,6 +9,7 @@ import Footer from './components/layout/Footer';
 import AddForm from './pages/AddForm';
 import CodeWorks from './pages/CodeWorks';
 import CodeWorkDetail from './pages/CodeWorkDetail';
+import CodeNFTList from './pages/CodeNFTList';
 
 function App() {
   const [account, setAccount] = useState('');
@@ -59,6 +60,9 @@ function App() {
           <CodeWorkDetail
             walletAddress={account}
             codeworkNFTBlockchain={codeworkNFTBlockchain} />
+        </Route>
+        <Route path="/codenftlist">
+          <CodeNFTList />
         </Route>
         <Route path="/">
           <CodeWorks />
