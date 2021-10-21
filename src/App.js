@@ -10,6 +10,7 @@ import AddForm from './pages/AddForm';
 import CodeWorks from './pages/CodeWorks';
 import CodeWorkDetail from './pages/CodeWorkDetail';
 import CodeNFTList from './pages/CodeNFTList';
+import AddCode from './pages/AddCode';
 
 function App() {
   const [account, setAccount] = useState('');
@@ -55,6 +56,9 @@ function App() {
       <Switch>
         <Route path="/addform">
           <AddForm />
+        </Route>
+        <Route path="/addcode">
+          <AddCode />
         </Route>
         <Route path="/works/:cid">
           <CodeWorkDetail

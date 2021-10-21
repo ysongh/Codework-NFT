@@ -41,6 +41,13 @@ function Navbar({ loadBlockchain, walletAddress, setAccount, setCodeworkNFTBlock
           active={activeItem === 'Code NFT List'}
           onClick={() => setActiveItem('Code NFT List')}
         />
+        <Menu.Item
+          as={Link}
+          to="/addcode"
+          name='Add Code'
+          active={activeItem === 'Add Code'}
+          onClick={() => setActiveItem('Add Code')}
+        />
         {walletAddress ? (
           <Menu.Menu position='right'>
             <Menu.Item>
