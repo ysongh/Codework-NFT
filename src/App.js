@@ -68,7 +68,7 @@ function App() {
             codeworkNFTBlockchain={codeworkNFTBlockchain} />
         </Route>
         <Route path="/codenftlist">
-          <CodeNFTList />
+          <CodeNFTList codeworkNFTBlockchain={codeworkNFTBlockchain} />
         </Route>
         <Route path="/">
           <CodeWorks />
