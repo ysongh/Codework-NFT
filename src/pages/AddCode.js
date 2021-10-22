@@ -4,7 +4,7 @@ import { Container, Card, Form, Label, Input, Button, Icon } from 'semantic-ui-r
 
 import Spinner from '../components/common/Spinner';
 
-function AddCode() {
+function AddCode({ walletAddress, codeworkNFTBlockchain }) {
   const history = useHistory();
   const [name, setName] = useState('');
   const [url, setURL] = useState('');
@@ -32,7 +32,14 @@ function AddCode() {
 
       setLoading(true);
 
-      history.push('/');
+      const event = await codeworkNFTBlockchain.methods
+        .addCodeToList(url, window.web3.utils.toWei(price, 'Ether'), description)
+        .send({ from: walletAddress });
+    
+      console.log(event);
+
+      setLoading(false);
+      history.push('/codenftlist');
     } catch(err) {
       console.error(err);
       setLoading(false);
@@ -83,13 +90,16 @@ function AddCode() {
                 onChange={(e) => setDescription(e.target.value)} />
             </Form.Field>
             
-            <Button
-              type='submit'
-              color="violet"
-              onClick={submitCode}
-            >
-              Create Code NFT
-            </Button>
+            {walletAddress
+              ? <Button
+                  type='submit'
+                  color="violet"
+                  onClick={submitCode}
+                >
+                  Create Code NFT
+                </Button>
+              : <h4 style={{ color: 'red' }}>Connect to your ethereum wallet</h4>
+            }
             
             {loading && <Spinner text="Creating..." />}
           </Form>

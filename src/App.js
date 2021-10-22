@@ -58,7 +58,9 @@ function App() {
           <AddForm />
         </Route>
         <Route path="/addcode">
-          <AddCode />
+          <AddCode
+            walletAddress={account}
+            codeworkNFTBlockchain={codeworkNFTBlockchain} />
         </Route>
         <Route path="/works/:cid">
           <CodeWorkDetail
