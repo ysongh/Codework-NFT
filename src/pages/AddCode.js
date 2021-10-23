@@ -6,7 +6,7 @@ import Spinner from '../components/common/Spinner';
 
 function AddCode({ walletAddress, codeworkNFTBlockchain }) {
   const history = useHistory();
-  const [name, setName] = useState('');
+  const [title, setTitle] = useState('');
   const [url, setURL] = useState('');
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
@@ -17,8 +17,8 @@ function AddCode({ walletAddress, codeworkNFTBlockchain }) {
     try{
       setErrors({});
 
-      if(!name){
-        setErrors({name: true});
+      if(!title){
+        setErrors({title: true});
         return;
       }
       if(!url){
@@ -33,7 +33,7 @@ function AddCode({ walletAddress, codeworkNFTBlockchain }) {
       setLoading(true);
 
       const event = await codeworkNFTBlockchain.methods
-        .addCodeToList(url, window.web3.utils.toWei(price, 'Ether'), description)
+        .addCodeToList(title, url, window.web3.utils.toWei(price, 'Ether'), description)
         .send({ from: walletAddress });
     
       console.log(event);
@@ -57,8 +57,8 @@ function AddCode({ walletAddress, codeworkNFTBlockchain }) {
           <Form>
             <Form.Field>
               <label>Title *</label>
-              <input value={name} onChange={(e) => setName(e.target.value)} />
-              {errors.name && <Label basic color='red' pointing>
+              <input value={title} onChange={(e) => setTitle(e.target.value)} />
+              {errors.title && <Label basic color='red' pointing>
                 Please enter a title
               </Label>}
             </Form.Field>

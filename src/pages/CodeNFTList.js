@@ -32,7 +32,7 @@ function CodeNFTList({ codeworkNFTBlockchain }) {
                 <Grid.Column key={code.codeId} style={{marginBottom: '1rem'}}>
                   <Card color='orange'>
                     <Card.Content>
-                      <Card.Header>Code</Card.Header>
+                      <Card.Header>{code.title}</Card.Header>
                       <Card.Description>
                         {code.description}
                       </Card.Description>

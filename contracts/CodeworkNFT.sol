@@ -28,6 +28,7 @@ contract CodeworkNFT is ERC721URIStorage {
 
   struct CodeData {
     uint codeId;
+    string title;
     string url;
     uint price;
     string description;
@@ -48,6 +49,7 @@ contract CodeworkNFT is ERC721URIStorage {
 
   event CodeDataLog (
     uint codeId,
+    string title,
     string url,
     uint price,
     string description,
@@ -81,11 +83,11 @@ contract CodeworkNFT is ERC721URIStorage {
     emit CodeWorkSubmit(codeCount, _workId, _previewURL, block.timestamp, _price, _email,_owner,_owner);
   }
 
-  function addCodeToList(string memory _url, uint _price, string memory _description) external {
+  function addCodeToList(string memory _title, string memory _url, uint _price, string memory _description) external {
     codeDataCount++;
-    codeDataList[codeDataCount] = CodeData(codeDataCount, _url, _price, _description, block.timestamp, msg.sender);
+    codeDataList[codeDataCount] = CodeData(codeDataCount, _title, _url, _price, _description, block.timestamp, msg.sender);
     
-    emit CodeDataLog(codeDataCount, _url, _price, _description, block.timestamp, msg.sender);
+    emit CodeDataLog(codeDataCount, _title, _url, _price, _description, block.timestamp, msg.sender);
   }
 
   function payCode(uint _codeId) external payable {
