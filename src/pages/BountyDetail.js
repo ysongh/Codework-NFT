@@ -11,7 +11,7 @@ import CodeList from '../components/CodeList';
 import ImageList from '../components/ImageList';
 import Spinner from '../components/common/Spinner';
 
-function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
+function Bounties({ walletAddress, codeworkNFTBlockchain }) {
   const { cid, id } = useParams();
   const [metadata, setMetadata] = useState({});
   const [imageHashes, setImageHashes] = useState([]);
@@ -154,4 +154,4 @@ function CodeWorkDetail({ walletAddress, codeworkNFTBlockchain }) {
   )
 }
 
-export default CodeWorkDetail;
+export default Bounties;

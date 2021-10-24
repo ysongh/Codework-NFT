@@ -6,7 +6,7 @@ import dateFormat from 'dateformat';
 import { NFTStorageAPIKey } from '../config';
 import CardWorkLoading from '../components/common/CardWorkLoading';
 
-function CodeWorks() {
+function Bounties() {
   const [works, setWorks] = useState([]);
   const [showMessage, setShowMessage] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -98,4 +98,4 @@ function CodeWorks() {
   )
 }
 
-export default CodeWorks;
+export default Bounties;

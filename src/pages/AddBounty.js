@@ -10,7 +10,7 @@ import TextEditor from '../components/TextEditor';
 const apiKey = NFTStorageAPIKey;
 const client = new NFTStorage({ token: apiKey })
 
-function AddForm() {
+function AddBounty() {
   const history = useHistory();
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
@@ -146,4 +146,4 @@ function AddForm() {
   )
 }
 
-export default AddForm;
+export default AddBounty;

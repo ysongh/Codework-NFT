@@ -6,9 +6,9 @@ import './App.css';
 import CodeworkNFT from './abis/CodeworkNFT.json';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
-import AddForm from './pages/AddForm';
-import CodeWorks from './pages/CodeWorks';
-import CodeWorkDetail from './pages/CodeWorkDetail';
+import AddBounty from './pages/AddBounty';
+import Bounties from './pages/Bounties';
+import BountyDetail from './pages/BountyDetail';
 import CodeNFTList from './pages/CodeNFTList';
 import AddCode from './pages/AddCode';
 
@@ -54,8 +54,8 @@ function App() {
         setAccount={setAccount}
         setCodeworkNFTBlockchain={setCodeworkNFTBlockchain} />
       <Switch>
-        <Route path="/addform">
-          <AddForm />
+        <Route path="/addbounty">
+          <AddBounty />
         </Route>
         <Route path="/addcode">
           <AddCode
@@ -63,7 +63,7 @@ function App() {
             codeworkNFTBlockchain={codeworkNFTBlockchain} />
         </Route>
         <Route path="/works/:cid">
-          <CodeWorkDetail
+          <BountyDetail
             walletAddress={account}
             codeworkNFTBlockchain={codeworkNFTBlockchain} />
         </Route>
@@ -71,7 +71,7 @@ function App() {
           <CodeNFTList codeworkNFTBlockchain={codeworkNFTBlockchain} />
         </Route>
         <Route path="/">
-          <CodeWorks />
+          <Bounties />
         </Route>
       </Switch>
       <Footer />

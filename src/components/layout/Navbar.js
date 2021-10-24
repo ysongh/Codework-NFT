@@ -29,10 +29,10 @@ function Navbar({ loadBlockchain, walletAddress, setAccount, setCodeworkNFTBlock
         />
         <Menu.Item
           as={Link}
-          to="/addform"
-          name='Add Work'
-          active={activeItem === 'Add Work'}
-          onClick={() => setActiveItem('Add Work')}
+          to="/addbounty"
+          name='Create Bounty'
+          active={activeItem === 'Create Bounty'}
+          onClick={() => setActiveItem('Create Bounty')}
         />
         <Menu.Item
           as={Link}
