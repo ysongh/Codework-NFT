@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Container, Card, Form, Label, Input, Button, Icon } from 'semantic-ui-react';
+import { Container, Message, Card, Form, Label, Input, Button, Icon } from 'semantic-ui-react';
 
 import Spinner from '../components/common/Spinner';
 
@@ -49,11 +49,13 @@ function AddCode({ walletAddress, codeworkNFTBlockchain }) {
   return (
     <Container className="bodyHeight">
       <Card centered style={{ width: '600px'}} color='purple'>
+        <Message
+          attached
+          color="violet"
+          header='Sell your code as NFT'
+          content='Fill the details below'
+        />
         <Card.Content>
-          <h1 style={{ fontSize: '1.8rem'}}>Sell your code as NFT</h1>
-          <p style={{ fontSize: '1rem', color: 'gray', marginBottom: '2rem' }}>
-            Fill the details below
-          </p>
           <Form>
             <Form.Field>
               <label>Title *</label>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { NFTStorage, File } from 'nft.storage';
-import { Container, Card, Form, Label, Button, Icon } from 'semantic-ui-react';
+import { Container, Message, Card, Form, Label, Button, Icon } from 'semantic-ui-react';
 
 import { NFTStorageAPIKey } from '../config';
 import Spinner from '../components/common/Spinner';
@@ -78,11 +78,13 @@ function AddBounty() {
   return (
     <Container className="bodyHeight">
       <Card centered style={{ width: '600px'}} color='purple'>
+        <Message
+          attached
+          color="violet"
+          header='Need something to be build by developers?'
+          content='Fill the details below'
+        />
         <Card.Content>
-          <h1 style={{ fontSize: '1.8rem'}}>Need something to be build by developers?</h1>
-          <p style={{ fontSize: '1rem', color: 'gray', marginBottom: '2rem' }}>
-            Fill the details below
-          </p>
           <Form>
             <Form.Field>
               <label>Title *</label>
