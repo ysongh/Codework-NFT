@@ -33,11 +33,14 @@ function CodeNFTList({ codeworkNFTBlockchain }) {
                   <Card color='orange'>
                     <Card.Content>
                       <Card.Header>{code.title}</Card.Header>
+                      <Card.Meta>
+                        {code.price / 10 ** 18} ETH
+                      </Card.Meta>
                       <Card.Description>
                         {code.description}
                       </Card.Description>
                       <div style={{marginTop: '.7rem'}}>
-                        <Button color='violet'>
+                        <Button color='violet' fluid>
                           View
                         </Button>
                       </div>
