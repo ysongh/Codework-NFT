@@ -10,6 +10,7 @@ import AddBounty from './pages/AddBounty';
 import Bounties from './pages/Bounties';
 import BountyDetail from './pages/BountyDetail';
 import CodeNFTList from './pages/CodeNFTList';
+import CodeDetail from './pages/CodeDetail';
 import AddCode from './pages/AddCode';
 
 function App() {
@@ -65,6 +66,10 @@ function App() {
         <Route path="/works/:cid">
           <BountyDetail
             walletAddress={account}
+            codeworkNFTBlockchain={codeworkNFTBlockchain} />
+        </Route>
+        <Route path="/codenftlist/:id">
+          <CodeDetail
             codeworkNFTBlockchain={codeworkNFTBlockchain} />
         </Route>
         <Route path="/codenftlist">

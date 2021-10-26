@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Container, Grid, Card, Button } from 'semantic-ui-react';
 
 function CodeNFTList({ codeworkNFTBlockchain }) {
@@ -40,7 +41,7 @@ function CodeNFTList({ codeworkNFTBlockchain }) {
                         {code.description}
                       </Card.Description>
                       <div style={{marginTop: '.7rem'}}>
-                        <Button color='violet' fluid>
+                        <Button color='violet' fluid  as={Link} to={`/codenftlist/${code.codeId}`}>
                           View
                         </Button>
                       </div>
