@@ -17,7 +17,6 @@ function CodeDetail({ codeworkNFTBlockchain }) {
 
   return (
     <Container className="bodyHeight">
-      <h1>List of Codes</h1>
       {!codeworkNFTBlockchain
         ? <h4 style={{ color: 'red' }}>Connect to your ethereum wallet</h4>
         : <Card color='orange' fluid>
