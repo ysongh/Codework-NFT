@@ -57,11 +57,19 @@ contract CodeworkNFT is ERC721URIStorage {
     address from
   );
 
-   event Payment (
+  event Payment (
     address from,
     address to,
     string workId,
     uint codeId,
+    uint amount
+  );
+
+  event PurchaseCodeNFT (
+    address from,
+    address to,
+    uint codeId,
+    string url,
     uint amount
   );
 
@@ -105,5 +113,17 @@ contract CodeworkNFT is ERC721URIStorage {
     require(_codeWork.viewer == msg.sender, "You do not own this code");
 
     return secretCodeList[_codeId];
+  }
+
+  function buyCodeNFT(uint _codeId) external payable {
+    CodeData memory _codeData = codeDataList[_codeId];
+    payable(_codeData.from).transfer(msg.value);
+
+    _tokenIds.increment();
+    uint _tokenId = _tokenIds.current();
+    _safeMint(msg.sender, _tokenId);
+    _setTokenURI(_tokenId, _codeData.url);
+
+    emit PurchaseCodeNFT(msg.sender, _codeData.from, _codeId, _codeData.url, msg.value);
   }
 }

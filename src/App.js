@@ -70,6 +70,7 @@ function App() {
         </Route>
         <Route path="/codenftlist/:id">
           <CodeDetail
+            walletAddress={account}
             codeworkNFTBlockchain={codeworkNFTBlockchain} />
         </Route>
         <Route path="/codenftlist">

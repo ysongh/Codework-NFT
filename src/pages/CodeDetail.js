@@ -2,9 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Container, Card, Button } from 'semantic-ui-react';
 
-function CodeDetail({ codeworkNFTBlockchain }) {
+import Spinner from '../components/common/Spinner';
+
+function CodeDetail({ walletAddress, codeworkNFTBlockchain }) {
   const { id } = useParams();
+
   const [code, setCode] = useState({});
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const loadCode = async () => {
@@ -14,6 +18,21 @@ function CodeDetail({ codeworkNFTBlockchain }) {
 
     if (codeworkNFTBlockchain) loadCode();
   }, [codeworkNFTBlockchain, id])
+
+  const purchase = async () => {
+    try{
+      setLoading(true);
+      const data = await codeworkNFTBlockchain.methods
+        .buyCodeNFT(id)
+        .send({ from: walletAddress, value: code.price });
+      
+      console.log(data);
+      setLoading(false);
+    } catch(err) {
+      console.error(err);
+      setLoading(false);
+    }
+  }
 
   return (
     <Container className="bodyHeight">
@@ -29,11 +48,12 @@ function CodeDetail({ codeworkNFTBlockchain }) {
                 <a href={code.url} target="_blank" rel="noopener noreferrer">{code.url}</a>
               </Card.Description>
               <div style={{marginTop: '.7rem', display: 'flex', alignItems: 'center'}}>
-                <Button color='violet'>
+                <Button color='violet' onClick={purchase}>
                   Buy
                 </Button>
                 <p>{code.price / 10 ** 18} ETH</p>
               </div>
+              {loading && <Spinner text="Minting NFT..." />}
             </Card.Content>
           </Card>
       }
