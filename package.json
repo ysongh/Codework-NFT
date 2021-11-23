@@ -29,7 +29,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cdev": "truffle migrate --reset",
+    "ckovan": "truffle migrate --network kovan --reset"
   },
   "eslintConfig": {
     "extends": [
