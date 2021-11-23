@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Grid, Card, Button } from 'semantic-ui-react';
 
+import ConnectWalletMessage from '../components/common/ConnectWalletMessage';
+
 function CodeNFTList({ codeworkNFTBlockchain }) {
   const [codes, setCodes] = useState([]);
 
@@ -26,7 +28,7 @@ function CodeNFTList({ codeworkNFTBlockchain }) {
     <Container className="bodyHeight">
       <h1>List of Codes</h1>
       {!codeworkNFTBlockchain
-        ? <h4 style={{ color: 'red' }}>Connect to your ethereum wallet</h4>
+        ? <ConnectWalletMessage />
         : <Grid columns={3} doubling>
             <Grid.Row>
               {codes.map(code => (
