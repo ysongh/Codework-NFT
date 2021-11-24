@@ -48,6 +48,13 @@ function Navbar({ loadBlockchain, walletAddress, setAccount, setCodeworkNFTBlock
           active={activeItem === 'Add Code'}
           onClick={() => setActiveItem('Add Code')}
         />
+        <Menu.Item
+          as="a"
+          href="https://docs.google.com/forms/d/e/1FAIpQLSekANSgKrBphtgclHiLZFLugK8qqeXFPojraqksycwbeJPEWQ/viewform"
+          target="_blank"
+          rel="noopener noreferrer"
+          name='Feedback'
+        />
         {walletAddress ? (
           <Menu.Menu position='right'>
             <Menu.Item>
