@@ -95,7 +95,7 @@ function AddBounty() {
             </Form.Field>
 
             <Form.Field>
-              <label>Upload images</label>
+              <label>Upload images (Images you upload will be public and cannot be remove)</label>
               <label htmlFor="img" className="btn-file">
                 <Icon name='upload' style={{ fontSize: '1.25rem'}} />
               </label>
@@ -131,7 +131,7 @@ function AddBounty() {
               <label>Description</label>
               <TextEditor description={description} setDescription={setDescription} />
             </Form.Field>
-            
+                    
             <Button
               type='submit'
               color="violet"
