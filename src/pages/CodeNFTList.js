@@ -25,7 +25,7 @@ function CodeNFTList({ codeworkNFTBlockchain }) {
   console.log(codes)
 
   return (
-    <Container className="bodyHeight">
+    <Container>
       <h1>List of Codes</h1>
       {!codeworkNFTBlockchain
         ? <ConnectWalletMessage />

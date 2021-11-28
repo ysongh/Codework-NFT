@@ -51,7 +51,7 @@ function Bounties() {
   }
 
   return (
-    <Container className="bodyHeight">
+    <Container>
       {showMessage && <Message
         color='teal'
         onDismiss={handleDismiss}

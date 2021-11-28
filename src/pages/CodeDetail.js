@@ -35,7 +35,7 @@ function CodeDetail({ walletAddress, codeworkNFTBlockchain }) {
   }
 
   return (
-    <Container className="bodyHeight">
+    <Container>
       {!codeworkNFTBlockchain
         ? <h4 style={{ color: 'red' }}>Connect to your ethereum wallet</h4>
         : <Card color='orange' fluid>

@@ -85,7 +85,7 @@ function Bounties({ walletAddress, codeworkNFTBlockchain }) {
   }
 
   return (
-    <Container className="bodyHeight">
+    <Container>
       <Card color='orange' fluid>
         <Card.Content>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>

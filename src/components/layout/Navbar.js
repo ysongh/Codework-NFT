@@ -4,7 +4,7 @@ import { Container, Menu, Button } from 'semantic-ui-react';
 
 function Navbar({ loadBlockchain, walletAddress, setAccount, setCodeworkNFTBlockchain }) {
   const [activeItem, setActiveItem] = useState('Home');
-  
+
   const logout = () => {
     setAccount('');
     setCodeworkNFTBlockchain(null);

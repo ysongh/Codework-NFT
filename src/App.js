@@ -54,32 +54,36 @@ function App() {
         walletAddress={account}
         setAccount={setAccount}
         setCodeworkNFTBlockchain={setCodeworkNFTBlockchain} />
-      <Switch>
-        <Route path="/addbounty">
-          <AddBounty />
-        </Route>
-        <Route path="/addcode">
-          <AddCode
-            walletAddress={account}
-            codeworkNFTBlockchain={codeworkNFTBlockchain} />
-        </Route>
-        <Route path="/works/:cid">
-          <BountyDetail
-            walletAddress={account}
-            codeworkNFTBlockchain={codeworkNFTBlockchain} />
-        </Route>
-        <Route path="/codenftlist/:id">
-          <CodeDetail
-            walletAddress={account}
-            codeworkNFTBlockchain={codeworkNFTBlockchain} />
-        </Route>
-        <Route path="/codenftlist">
-          <CodeNFTList codeworkNFTBlockchain={codeworkNFTBlockchain} />
-        </Route>
-        <Route path="/">
-          <Bounties />
-        </Route>
-      </Switch>
+
+      <main className="bodyHeight">
+        <Switch>
+          <Route path="/addbounty">
+            <AddBounty />
+          </Route>
+          <Route path="/addcode">
+            <AddCode
+              walletAddress={account}
+              codeworkNFTBlockchain={codeworkNFTBlockchain} />
+          </Route>
+          <Route path="/works/:cid">
+            <BountyDetail
+              walletAddress={account}
+              codeworkNFTBlockchain={codeworkNFTBlockchain} />
+          </Route>
+          <Route path="/codenftlist/:id">
+            <CodeDetail
+              walletAddress={account}
+              codeworkNFTBlockchain={codeworkNFTBlockchain} />
+          </Route>
+          <Route path="/codenftlist">
+            <CodeNFTList codeworkNFTBlockchain={codeworkNFTBlockchain} />
+          </Route>
+          <Route path="/">
+            <Bounties />
+          </Route>
+        </Switch>
+      </main>
+      
       <Footer />
     </HashRouter>
   );

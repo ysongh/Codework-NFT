@@ -47,7 +47,7 @@ function AddCode({ walletAddress, codeworkNFTBlockchain }) {
   }
 
   return (
-    <Container className="bodyHeight">
+    <Container>
       <Card centered style={{ width: '600px'}} color='purple'>
         <Message
           attached
