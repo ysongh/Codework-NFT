@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
 import { HashRouter, Switch, Route } from 'react-router-dom';
+import {
+  Icon,
+  Menu,
+  Segment,
+  Sidebar,
+} from 'semantic-ui-react';
 import Web3 from 'web3';
 
 import './App.css';
@@ -16,6 +22,7 @@ import AddCode from './pages/AddCode';
 function App() {
   const [account, setAccount] = useState('');
   const [codeworkNFTBlockchain, setCodeworkNFTBlockchain] = useState(null);
+  const [visible, setVisible] = React.useState(true);
 
   const loadBlockchain = async () => {
     if (window.ethereum) {
@@ -55,35 +62,57 @@ function App() {
         setAccount={setAccount}
         setCodeworkNFTBlockchain={setCodeworkNFTBlockchain} />
 
-      <main className="bodyHeight">
-        <Switch>
-          <Route path="/addbounty">
-            <AddBounty />
-          </Route>
-          <Route path="/addcode">
-            <AddCode
-              walletAddress={account}
-              codeworkNFTBlockchain={codeworkNFTBlockchain} />
-          </Route>
-          <Route path="/works/:cid">
-            <BountyDetail
-              walletAddress={account}
-              codeworkNFTBlockchain={codeworkNFTBlockchain} />
-          </Route>
-          <Route path="/codenftlist/:id">
-            <CodeDetail
-              walletAddress={account}
-              codeworkNFTBlockchain={codeworkNFTBlockchain} />
-          </Route>
-          <Route path="/codenftlist">
-            <CodeNFTList codeworkNFTBlockchain={codeworkNFTBlockchain} />
-          </Route>
-          <Route path="/">
-            <Bounties />
-          </Route>
-        </Switch>
+      <main>
+        <Sidebar.Pushable as={Segment}>
+          <Sidebar
+            as={Menu}
+            animation='overlay'
+            icon='labeled'
+            inverted
+            onHide={() => setVisible(false)}
+            vertical
+            visible={visible}
+            width='thin'
+          >
+            <Menu.Item as='a'>
+              <Icon name='home' />
+              Home
+            </Menu.Item>
+          </Sidebar>
+
+          <Sidebar.Pusher >
+            <Segment basic className="bodyHeight">
+              <Switch>
+                <Route path="/addbounty">
+                  <AddBounty />
+                </Route>
+                <Route path="/addcode">
+                  <AddCode
+                    walletAddress={account}
+                    codeworkNFTBlockchain={codeworkNFTBlockchain} />
+                </Route>
+                <Route path="/works/:cid">
+                  <BountyDetail
+                    walletAddress={account}
+                    codeworkNFTBlockchain={codeworkNFTBlockchain} />
+                </Route>
+                <Route path="/codenftlist/:id">
+                  <CodeDetail
+                    walletAddress={account}
+                    codeworkNFTBlockchain={codeworkNFTBlockchain} />
+                </Route>
+                <Route path="/codenftlist">
+                  <CodeNFTList codeworkNFTBlockchain={codeworkNFTBlockchain} />
+                </Route>
+                <Route path="/">
+                  <Bounties />
+                </Route>
+              </Switch>
+            </Segment>
+          </Sidebar.Pusher>
+        </Sidebar.Pushable>
       </main>
-      
+
       <Footer />
     </HashRouter>
   );
