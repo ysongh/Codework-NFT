@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Menu, Button } from 'semantic-ui-react';
+import { Container, Menu, Button, Icon } from 'semantic-ui-react';
 
-function Navbar({ loadBlockchain, walletAddress, setAccount, setCodeworkNFTBlockchain }) {
+function Navbar({ loadBlockchain, walletAddress, setAccount, setCodeworkNFTBlockchain, setVisible }) {
   const [activeItem, setActiveItem] = useState('Home');
 
   const logout = () => {
@@ -10,7 +10,7 @@ function Navbar({ loadBlockchain, walletAddress, setAccount, setCodeworkNFTBlock
     setCodeworkNFTBlockchain(null);
   }
   return (
-    <Menu color="violet" inverted pointing stackable>
+    <Menu color="violet" inverted pointing>
       <Container>
         <Menu.Item
           as={Link}
@@ -20,41 +20,44 @@ function Navbar({ loadBlockchain, walletAddress, setAccount, setCodeworkNFTBlock
           <img src='/logo.png' style={{ width: '10rem'}} alt="Logo" />
         </Menu.Item>
         
-        <Menu.Item
-          as={Link}
-          to="/"
-          name='Home'
-          active={activeItem === 'Home'}
-          onClick={() => setActiveItem('Home')}
-        />
-        <Menu.Item
-          as={Link}
-          to="/addbounty"
-          name='Create Bounty'
-          active={activeItem === 'Create Bounty'}
-          onClick={() => setActiveItem('Create Bounty')}
-        />
-        <Menu.Item
-          as={Link}
-          to="/codenftlist"
-          name='Code NFT List'
-          active={activeItem === 'Code NFT List'}
-          onClick={() => setActiveItem('Code NFT List')}
-        />
-        <Menu.Item
-          as={Link}
-          to="/addcode"
-          name='Add Code'
-          active={activeItem === 'Add Code'}
-          onClick={() => setActiveItem('Add Code')}
-        />
-        <Menu.Item
-          as="a"
-          href="https://docs.google.com/forms/d/e/1FAIpQLSekANSgKrBphtgclHiLZFLugK8qqeXFPojraqksycwbeJPEWQ/viewform"
-          target="_blank"
-          rel="noopener noreferrer"
-          name='Feedback'
-        />
+        <div className="navbar">
+          <Menu.Item
+            as={Link}
+            to="/"
+            name='Home'
+            active={activeItem === 'Home'}
+            onClick={() => setActiveItem('Home')}
+          />
+          <Menu.Item
+            as={Link}
+            to="/addbounty"
+            name='Create Bounty'
+            active={activeItem === 'Create Bounty'}
+            onClick={() => setActiveItem('Create Bounty')}
+          />
+          <Menu.Item
+            as={Link}
+            to="/codenftlist"
+            name='Code NFT List'
+            active={activeItem === 'Code NFT List'}
+            onClick={() => setActiveItem('Code NFT List')}
+          />
+          <Menu.Item
+            as={Link}
+            to="/addcode"
+            name='Add Code'
+            active={activeItem === 'Add Code'}
+            onClick={() => setActiveItem('Add Code')}
+          />
+          <Menu.Item
+            as="a"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSekANSgKrBphtgclHiLZFLugK8qqeXFPojraqksycwbeJPEWQ/viewform"
+            target="_blank"
+            rel="noopener noreferrer"
+            name='Feedback'
+          />
+          
+        </div>
         {walletAddress ? (
           <Menu.Menu position='right'>
             <Menu.Item>
@@ -71,6 +74,9 @@ function Navbar({ loadBlockchain, walletAddress, setAccount, setCodeworkNFTBlock
             </Menu.Item>
           </Menu.Menu>
         )}
+        <Button className="navbar_btn" icon basic color='teal' onClick={() => setVisible(true)}>
+          <Icon className="navbar_icon" name='bars' />
+        </Button>
       </Container>
     </Menu>
   )

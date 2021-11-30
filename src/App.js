@@ -22,7 +22,7 @@ import AddCode from './pages/AddCode';
 function App() {
   const [account, setAccount] = useState('');
   const [codeworkNFTBlockchain, setCodeworkNFTBlockchain] = useState(null);
-  const [visible, setVisible] = React.useState(true);
+  const [visible, setVisible] = useState(false);
 
   const loadBlockchain = async () => {
     if (window.ethereum) {
@@ -60,11 +60,13 @@ function App() {
         loadBlockchain={loadBlockchain}
         walletAddress={account}
         setAccount={setAccount}
-        setCodeworkNFTBlockchain={setCodeworkNFTBlockchain} />
+        setCodeworkNFTBlockchain={setCodeworkNFTBlockchain}
+        setVisible={setVisible} />
 
       <main>
         <Sidebar.Pushable as={Segment}>
           <Sidebar
+            className="sidebar"
             as={Menu}
             animation='overlay'
             icon='labeled'

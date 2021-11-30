@@ -45,3 +45,34 @@
 .hideToolbar .ql-toolbar.ql-snow{
     display: none;
 }
+
+.navbar {
+    display: flex;
+}
+
+.navbar_btn {
+    display: none !important;
+}
+
+.navbar_icon {
+    color: white !important;
+    font-size: 1.5rem !important;
+}
+
+.sidebar {
+    display: none !important;
+}
+
+@media only screen and (max-width: 980px) {
+    .navbar {
+        display: none !important;
+    }
+
+    .navbar_btn {
+        display: block !important;
+    }
+
+    .sidebar {
+        display: block !important;
+    }
+}
