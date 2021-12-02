@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Menu, Button, Icon } from 'semantic-ui-react';
 
-function Navbar({ loadBlockchain, walletAddress, setAccount, setCodeworkNFTBlockchain, setVisible }) {
-  const [activeItem, setActiveItem] = useState('Home');
-
+function Navbar({ loadBlockchain, walletAddress, setAccount, setCodeworkNFTBlockchain, setVisible, activeItem, setActiveItem }) {
   const logout = () => {
     setAccount('');
     setCodeworkNFTBlockchain(null);
   }
+
   return (
     <Menu color="violet" inverted pointing>
       <Container>

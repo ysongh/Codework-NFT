@@ -1,16 +1,12 @@
 import React, { useState } from 'react';
 import { HashRouter, Switch, Route } from 'react-router-dom';
-import {
-  Icon,
-  Menu,
-  Segment,
-  Sidebar,
-} from 'semantic-ui-react';
+import { Menu, Segment, Sidebar } from 'semantic-ui-react';
 import Web3 from 'web3';
 
 import './App.css';
 import CodeworkNFT from './abis/CodeworkNFT.json';
 import Navbar from './components/layout/Navbar';
+import SideNav from './components/layout/SideNav';
 import Footer from './components/layout/Footer';
 import AddBounty from './pages/AddBounty';
 import Bounties from './pages/Bounties';
@@ -22,6 +18,7 @@ import AddCode from './pages/AddCode';
 function App() {
   const [account, setAccount] = useState('');
   const [codeworkNFTBlockchain, setCodeworkNFTBlockchain] = useState(null);
+  const [activeItem, setActiveItem] = useState('Home');
   const [visible, setVisible] = useState(false);
 
   const loadBlockchain = async () => {
@@ -61,7 +58,9 @@ function App() {
         walletAddress={account}
         setAccount={setAccount}
         setCodeworkNFTBlockchain={setCodeworkNFTBlockchain}
-        setVisible={setVisible} />
+        setVisible={setVisible}
+        activeItem={activeItem}
+        setActiveItem={setActiveItem} />
 
       <main>
         <Sidebar.Pushable as={Segment}>
@@ -76,10 +75,13 @@ function App() {
             visible={visible}
             width='thin'
           >
-            <Menu.Item as='a'>
-              <Icon name='home' />
-              Home
-            </Menu.Item>
+           <SideNav
+            loadBlockchain={loadBlockchain}
+            walletAddress={account}
+            setAccount={setAccount}
+            setCodeworkNFTBlockchain={setCodeworkNFTBlockchain}
+            activeItem={activeItem}
+            setActiveItem={setActiveItem}/>
           </Sidebar>
 
           <Sidebar.Pusher >
