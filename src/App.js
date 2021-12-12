@@ -51,6 +51,11 @@ function App() {
     }
   }
 
+  const setActiveLink = currentPage => {
+    setActiveItem(currentPage);
+    setVisible(false);
+  }
+
   return (
     <HashRouter className="App">
       <Navbar
@@ -81,7 +86,7 @@ function App() {
             setAccount={setAccount}
             setCodeworkNFTBlockchain={setCodeworkNFTBlockchain}
             activeItem={activeItem}
-            setActiveItem={setActiveItem}/>
+            setActiveLink={setActiveLink}/>
           </Sidebar>
 
           <Sidebar.Pusher >

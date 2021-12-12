@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Icon, Menu, Button } from 'semantic-ui-react';
 
-function SideNav({ loadBlockchain, walletAddress, setAccount, setCodeworkNFTBlockchain, activeItem, setActiveItem }) {
+function SideNav({ loadBlockchain, walletAddress, setAccount, setCodeworkNFTBlockchain, activeItem, setActiveLink }) {
   const logout = () => {
     setAccount('');
     setCodeworkNFTBlockchain(null);
@@ -10,16 +10,20 @@ function SideNav({ loadBlockchain, walletAddress, setAccount, setCodeworkNFTBloc
 
   return (
     <>
-      <Menu.Item as={Link} to="/">
-        <Icon name='home' />
-        Home
+      <Menu.Item
+        as={Link}
+        to="/"
+        active={activeItem === 'Home'}
+        onClick={() => setActiveLink('Home')}>
+          <Icon name='home' />
+          Home
       </Menu.Item>
 
       <Menu.Item
         as={Link}
         to="/addbounty"
         active={activeItem === 'Create Bounty'}
-        onClick={() => setActiveItem('Create Bounty')}>
+        onClick={() => setActiveLink('Create Bounty')}>
           <Icon name='bug' />
           Create Bounty
       </Menu.Item>
@@ -28,7 +32,7 @@ function SideNav({ loadBlockchain, walletAddress, setAccount, setCodeworkNFTBloc
         as={Link}
         to="/codenftlist"
         active={activeItem === 'Code NFT List'}
-        onClick={() => setActiveItem('Code NFT List')}>
+        onClick={() => setActiveLink('Code NFT List')}>
           <Icon name='grid layout' />
           Code NFT List
       </Menu.Item>
@@ -37,7 +41,7 @@ function SideNav({ loadBlockchain, walletAddress, setAccount, setCodeworkNFTBloc
         as={Link}
         to="/addcode"
         active={activeItem === 'Add Code'}
-        onClick={() => setActiveItem('Add Code')}>
+        onClick={() => setActiveLink('Add Code')}>
           <Icon name='code' />
           Add Code
       </Menu.Item>
