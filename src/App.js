@@ -81,10 +81,6 @@ function App() {
             width='thin'
           >
            <SideNav
-            loadBlockchain={loadBlockchain}
-            walletAddress={account}
-            setAccount={setAccount}
-            setCodeworkNFTBlockchain={setCodeworkNFTBlockchain}
             activeItem={activeItem}
             setActiveLink={setActiveLink}/>
           </Sidebar>

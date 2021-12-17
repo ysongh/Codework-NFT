@@ -1,13 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Icon, Menu, Button } from 'semantic-ui-react';
+import { Icon, Menu } from 'semantic-ui-react';
 
-function SideNav({ loadBlockchain, walletAddress, setAccount, setCodeworkNFTBlockchain, activeItem, setActiveLink }) {
-  const logout = () => {
-    setAccount('');
-    setCodeworkNFTBlockchain(null);
-  }
-
+function SideNav({ activeItem, setActiveLink }) {
   return (
     <>
       <Menu.Item
@@ -54,23 +49,6 @@ function SideNav({ loadBlockchain, walletAddress, setAccount, setCodeworkNFTBloc
           <Icon name='sticky note' />
           Feedback
       </Menu.Item>
-      
-      {walletAddress ? (
-        <Menu.Menu position='right'>
-          <Menu.Item>
-            <p>{walletAddress.substring(0,6)}...{walletAddress.substring(36,42)}</p>
-          </Menu.Item>
-          <Menu.Item>
-            <Button color="red" onClick={logout}>Disconnect</Button>
-          </Menu.Item>
-        </Menu.Menu>
-      ) : (
-        <Menu.Menu position='right'>
-          <Menu.Item>
-            <Button color='teal' onClick={loadBlockchain}>Open Wallet</Button>
-          </Menu.Item>
-        </Menu.Menu>
-      )}
     </>
   )
 }
