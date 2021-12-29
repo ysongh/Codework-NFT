@@ -10,7 +10,7 @@ function Footer() {
       <a href='https://twitter.com/codeworknft' aria-label="Icon" target='_blank' rel='noopener noreferrer'>
         <Icon link size='big' name='twitter' color='teal' style={{ marginBottom: '.5rem' }} />
       </a>
-      <p style={{ fontSize: '1.3rem' }}>Copyright &copy; 2021 Codework NFT</p>
+      <p style={{ fontSize: '1.3rem' }}>Copyright &copy; 2022 Codework NFT</p>
     </Segment>
   )
 }
