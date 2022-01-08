@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Menu, Button, Icon } from 'semantic-ui-react';
+import { Container, Menu, Dropdown, Button, Icon } from 'semantic-ui-react';
 
 function Navbar({ loadBlockchain, walletAddress, setAccount, setCodeworkNFTBlockchain, setVisible, activeItem, setActiveItem }) {
   const logout = () => {
@@ -27,27 +27,29 @@ function Navbar({ loadBlockchain, walletAddress, setAccount, setCodeworkNFTBlock
             active={activeItem === 'Home'}
             onClick={() => setActiveItem('Home')}
           />
-          <Menu.Item
-            as={Link}
-            to="/addbounty"
-            name='Create Bounty'
-            active={activeItem === 'Create Bounty'}
-            onClick={() => setActiveItem('Create Bounty')}
-          />
-          <Menu.Item
-            as={Link}
-            to="/codenftlist"
-            name='Code NFT List'
-            active={activeItem === 'Code NFT List'}
-            onClick={() => setActiveItem('Code NFT List')}
-          />
-          <Menu.Item
-            as={Link}
-            to="/addcode"
-            name='Add Code'
-            active={activeItem === 'Add Code'}
-            onClick={() => setActiveItem('Add Code')}
-          />
+
+          <Dropdown item text='Bounty'>
+            <Dropdown.Menu>
+              <Dropdown.Item as={Link} to="/">
+                List of Bounties
+              </Dropdown.Item>
+              <Dropdown.Item as={Link} to="/addbounty">
+                Create Bounty
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+
+          <Dropdown item text='Code NFT' >
+            <Dropdown.Menu>
+              <Dropdown.Item as={Link} to="/codenftlist">
+                List of Codes
+              </Dropdown.Item>
+              <Dropdown.Item as={Link} to="/addcode">
+              Add Code
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+
           <Menu.Item
             as="a"
             href="https://docs.google.com/forms/d/e/1FAIpQLSekANSgKrBphtgclHiLZFLugK8qqeXFPojraqksycwbeJPEWQ/viewform"
