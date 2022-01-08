@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Container, Message, Card, Form, Label, Input, Button, Icon } from 'semantic-ui-react';
 
 import Spinner from '../components/common/Spinner';
 
 function AddCode({ walletAddress, codeworkNFTBlockchain }) {
-  const history = useHistory();
+  const history = useNavigate();
   const [title, setTitle] = useState('');
   const [url, setURL] = useState('');
   const [price, setPrice] = useState('');
@@ -39,7 +39,7 @@ function AddCode({ walletAddress, codeworkNFTBlockchain }) {
       console.log(event);
 
       setLoading(false);
-      history.push('/codenftlist');
+      history('/codenftlist');
     } catch(err) {
       console.error(err);
       setLoading(false);

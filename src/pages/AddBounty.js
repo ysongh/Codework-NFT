@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { NFTStorage, File } from 'nft.storage';
 import { Container, Message, Card, Form, Label, Button, Icon } from 'semantic-ui-react';
 
@@ -11,7 +11,7 @@ const apiKey = NFTStorageAPIKey;
 const client = new NFTStorage({ token: apiKey })
 
 function AddBounty() {
-  const history = useHistory();
+  const history = useNavigate();
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [images, setImages] = useState([]);
@@ -64,7 +64,7 @@ function AddBounty() {
       const metadata = await client.storeDirectory(sendFiles);
       console.log(metadata);
 
-      history.push('/');
+      history('/');
     } catch(err) {
       console.error(err);
       setLoading(false);

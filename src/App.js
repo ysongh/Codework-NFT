@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { HashRouter, Switch, Route } from 'react-router-dom';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 import { Menu, Segment, Sidebar } from 'semantic-ui-react';
 import Web3 from 'web3';
 
@@ -87,32 +87,32 @@ function App() {
 
           <Sidebar.Pusher >
             <Segment basic className="bodyHeight">
-              <Switch>
-                <Route path="/addbounty">
-                  <AddBounty />
-                </Route>
-                <Route path="/addcode">
-                  <AddCode
-                    walletAddress={account}
-                    codeworkNFTBlockchain={codeworkNFTBlockchain} />
-                </Route>
-                <Route path="/works/:cid">
-                  <BountyDetail
-                    walletAddress={account}
-                    codeworkNFTBlockchain={codeworkNFTBlockchain} />
-                </Route>
-                <Route path="/codenftlist/:id">
-                  <CodeDetail
-                    walletAddress={account}
-                    codeworkNFTBlockchain={codeworkNFTBlockchain} />
-                </Route>
-                <Route path="/codenftlist">
-                  <CodeNFTList codeworkNFTBlockchain={codeworkNFTBlockchain} />
-                </Route>
-                <Route path="/">
-                  <Bounties />
-                </Route>
-              </Switch>
+              <Routes>
+                <Route path="/addbounty" element={<AddBounty />} />
+                <Route
+                  path="/addcode"
+                  element={
+                    <AddCode
+                      walletAddress={account}
+                      codeworkNFTBlockchain={codeworkNFTBlockchain} />} />
+                <Route
+                  path="/works/:cid"
+                  element={
+                    <BountyDetail
+                      walletAddress={account}
+                      codeworkNFTBlockchain={codeworkNFTBlockchain} /> }/>
+                <Route
+                  path="/codenftlist/:id"
+                  element={
+                    <CodeDetail
+                      walletAddress={account}
+                      codeworkNFTBlockchain={codeworkNFTBlockchain} /> } />
+                <Route
+                  path="/codenftlist"
+                  element={
+                    <CodeNFTList codeworkNFTBlockchain={codeworkNFTBlockchain} /> } />
+                <Route path="/" element={<Bounties />} />
+              </Routes>
             </Segment>
           </Sidebar.Pusher>
         </Sidebar.Pushable>
