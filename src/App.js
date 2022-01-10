@@ -8,6 +8,7 @@ import CodeworkNFT from './abis/CodeworkNFT.json';
 import Navbar from './components/layout/Navbar';
 import SideNav from './components/layout/SideNav';
 import Footer from './components/layout/Footer';
+import Home from './pages/Home';
 import AddBounty from './pages/AddBounty';
 import Bounties from './pages/Bounties';
 import BountyDetail from './pages/BountyDetail';
@@ -88,6 +89,7 @@ function App() {
           <Sidebar.Pusher >
             <Segment basic className="bodyHeight">
               <Routes>
+                <Route path="/listofbounties" element={<Bounties />} />
                 <Route path="/addbounty" element={<AddBounty />} />
                 <Route
                   path="/addcode"
@@ -111,7 +113,7 @@ function App() {
                   path="/codenftlist"
                   element={
                     <CodeNFTList codeworkNFTBlockchain={codeworkNFTBlockchain} /> } />
-                <Route path="/" element={<Bounties />} />
+                <Route path="/" element={<Home />} />
               </Routes>
             </Segment>
           </Sidebar.Pusher>

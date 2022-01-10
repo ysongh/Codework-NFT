@@ -30,7 +30,7 @@ function Navbar({ loadBlockchain, walletAddress, setAccount, setCodeworkNFTBlock
 
           <Dropdown item text='Bounty'>
             <Dropdown.Menu>
-              <Dropdown.Item as={Link} to="/" active={activeItem === 'List of Bounties'} onClick={() => setActiveItem('List of Bounties')}>
+              <Dropdown.Item as={Link} to="/listofbounties" active={activeItem === 'List of Bounties'} onClick={() => setActiveItem('List of Bounties')}>
                 List of Bounties
               </Dropdown.Item>
               <Dropdown.Item as={Link} to="/addbounty" active={activeItem === 'Create Bounty'} onClick={() => setActiveItem('Create Bounty')}>
