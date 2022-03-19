@@ -1,8 +1,6 @@
 # Codework NFT
 A dapp where users can request a website for developers to created it and they can buy it from the developers code
 
-- Demo - https://youtu.be/EVpZiIBKGuo
-
 ## Features
 - Users can make a post on what kind of website or features they want.
 - Users's post data and image are stored in nft.storage
