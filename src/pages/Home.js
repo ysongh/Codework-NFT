@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Container, Grid, Image, Button } from 'semantic-ui-react';
+import { Container, Grid, Image, Message, Button } from 'semantic-ui-react';
 
 function Home() {
   const history = useNavigate();
 
+  const [showMessage, setShowMessage] = useState(true);
+
+  const handleDismiss = () => {
+    setShowMessage(false);
+  }
+
   return (
     <Container>
+      {showMessage && <Message
+        color='teal'
+        onDismiss={handleDismiss}
+        header='Contract is deployed on Kovan Test Network'
+      />}
       <Grid style={{ marginTop: '3rem'}} stackable>
         <Grid.Row>
           <Grid.Column width={8}>
