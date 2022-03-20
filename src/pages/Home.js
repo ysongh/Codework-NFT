@@ -24,7 +24,8 @@ function Home() {
             <Image src='./heroimg.svg' alt="Code" style={{ width: "80%"}}/>
           </Grid.Column>
           <Grid.Column width={8}>
-            <h1 style={{ fontSize: '2.8rem', marginTop: '3rem'}}>Turn your code into NFT</h1>
+            <h1 style={{ fontSize: '2.8rem', marginTop: '3rem', marginBottom: '3px'}}>Turn your Codes into NFT</h1>
+            <p style={{ fontSize: '1.2rem'}}>You can own or sell your Code NFT</p>
             <br />
             <Button color='violet' onClick={() => history('/listofbounties')} size='large'>
               Bounties
