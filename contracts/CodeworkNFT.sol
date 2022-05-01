@@ -86,7 +86,7 @@ contract CodeworkNFT is ERC721URIStorage {
   function addCodeToWork(string memory _workId, uint _price, string memory _previewURL, string memory _email,  string memory _codeURL) external {
     _tokenIds.increment();
     uint _tokenId = _tokenIds.current();
-    _safeMint(msg.sender, _tokenId);
+    _mint(msg.sender, _tokenId);
     _setTokenURI(_tokenId, _previewURL);
 
     address _owner = msg.sender;
@@ -129,7 +129,7 @@ contract CodeworkNFT is ERC721URIStorage {
 
     _tokenIds.increment();
     uint _tokenId = _tokenIds.current();
-    _safeMint(msg.sender, _tokenId);
+    _mint(msg.sender, _tokenId);
     _setTokenURI(_tokenId, _codeData.url);
 
     emit PurchaseCodeNFT(msg.sender, _codeData.from, _codeId, _codeData.url, msg.value);
