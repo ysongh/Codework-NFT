@@ -17,6 +17,14 @@ module.exports = {
       timeoutBlocks: 200,
       skipDryRun: true
     },
+    // truffle migrate --network mumbai
+    mumbai: {
+      provider: () => new HDWalletProvider(mnemonic, `https://rpc-mumbai.maticvigil.com/`),
+      network_id: "80001",
+      confirmations: 2,
+      timeoutBlocks: 200,
+      skipDryRun: true
+    },
   },
   contracts_build_directory: './src/abis/',
   compilers: {
