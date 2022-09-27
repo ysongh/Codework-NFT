@@ -66,7 +66,9 @@ function Navbar({ loadBlockchain, walletAddress, setAccount, setCodeworkNFTBlock
               <p>{walletAddress.substring(0,8)}...{walletAddress.substring(34,42)}</p>
             </Menu.Item>
             <Menu.Item>
-              <Button color="red" onClick={logout}>Disconnect</Button>
+              <Button color="red" icon onClick={logout}>
+                <Icon name=' sign-out' />
+              </Button>
             </Menu.Item>
           </Menu.Menu>
         ) : (
