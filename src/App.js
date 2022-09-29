@@ -18,7 +18,7 @@ import AddCode from './pages/AddCode';
 
 function App() {
   const [account, setAccount] = useState('');
-  const [myBalance, setMyBalance] = useState('');
+  const [myBalance, setMyBalance] = useState(0);
   const [codeworkNFTBlockchain, setCodeworkNFTBlockchain] = useState(null);
   const [activeItem, setActiveItem] = useState('Home');
   const [visible, setVisible] = useState(false);

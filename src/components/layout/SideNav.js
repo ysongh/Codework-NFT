@@ -8,7 +8,7 @@ function SideNav({ activeItem, setActiveLink }) {
       <Menu.Item
         as={Link}
         to="/"
-        active={activeItem === 'Home'}list
+        active={activeItem === 'Home'}
         onClick={() => setActiveLink('Home')}>
           <Icon name='home' />
           Home
