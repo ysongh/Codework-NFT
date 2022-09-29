@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Menu, Dropdown, Button, Icon } from 'semantic-ui-react';
 
-function Navbar({ loadBlockchain, walletAddress, setAccount, setCodeworkNFTBlockchain, setVisible, activeItem, setActiveItem }) {
+function Navbar({ loadBlockchain, walletAddress, setAccount, myBalance, setCodeworkNFTBlockchain, setMyBalance, setVisible, activeItem, setActiveItem }) {
+  useEffect(() => {
+    if(walletAddress) getBalance();
+  }, [walletAddress])
+  
+  const getBalance = async () => {
+    const web3 = window.web3;
+    const balance = await web3.eth.getBalance(walletAddress);
+    setMyBalance(balance / 10 ** 18);
+  }
+
   const logout = () => {
     setAccount('');
     setCodeworkNFTBlockchain(null);
@@ -63,11 +73,14 @@ function Navbar({ loadBlockchain, walletAddress, setAccount, setCodeworkNFTBlock
         {walletAddress ? (
           <Menu.Menu position='right'>
             <Menu.Item>
+              <p>{myBalance.toFixed(3)} ETH</p>
+            </Menu.Item>
+            <Menu.Item>
               <p>{walletAddress.substring(0,8)}...{walletAddress.substring(34,42)}</p>
             </Menu.Item>
             <Menu.Item>
               <Button color="red" icon onClick={logout}>
-                <Icon name=' sign-out' />
+                <Icon name='sign-out' />
               </Button>
             </Menu.Item>
           </Menu.Menu>
