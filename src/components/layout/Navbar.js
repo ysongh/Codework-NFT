@@ -55,6 +55,9 @@ function Navbar({ loadBlockchain, walletAddress, setAccount, myBalance, setCodew
               <Dropdown.Item as={Link} to="/codenftlist" active={activeItem === 'List of Codes'} onClick={() => setActiveItem('List of Codes')}>
                 List of Codes
               </Dropdown.Item>
+              <Dropdown.Item as={Link} to="/mycodenftlist" active={activeItem === 'My Code NFT'} onClick={() => setActiveItem('My Code NFT')}>
+                My Code NFT
+              </Dropdown.Item>
               <Dropdown.Item as={Link} to="/addcode" active={activeItem === 'Add Code'} onClick={() => setActiveItem('Add Code')}>
                 Add Code
               </Dropdown.Item>

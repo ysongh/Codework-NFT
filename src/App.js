@@ -15,6 +15,7 @@ import BountyDetail from './pages/BountyDetail';
 import CodeNFTList from './pages/CodeNFTList';
 import CodeDetail from './pages/CodeDetail';
 import AddCode from './pages/AddCode';
+import MyCodeNFTList from './pages/MyCodeNFTList';
 
 function App() {
   const [account, setAccount] = useState('');
@@ -115,7 +116,14 @@ function App() {
                 <Route
                   path="/codenftlist"
                   element={
-                    <CodeNFTList codeworkNFTBlockchain={codeworkNFTBlockchain} /> } />
+                    <CodeNFTList
+                      codeworkNFTBlockchain={codeworkNFTBlockchain} /> } />
+                <Route
+                  path="/mycodenftlist"
+                  element={
+                    <MyCodeNFTList
+                      codeworkNFTBlockchain={codeworkNFTBlockchain}
+                      walletAddress={account} /> } />
                 <Route path="/" element={<Home />} />
               </Routes>
             </Segment>
