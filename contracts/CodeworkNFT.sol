@@ -134,4 +134,29 @@ contract CodeworkNFT is ERC721URIStorage {
 
     emit PurchaseCodeNFT(msg.sender, _codeData.from, _codeId, _codeData.url, msg.value);
   }
+
+  function getAllNFTsOwnByUser(address _userAddress) public view returns (CodeData[] memory) {
+    uint totalNFTCount = _tokenIds.current();
+    uint itemCount = 0;
+    uint currentIndex = 0;
+
+    for (uint i = 0; i < totalNFTCount; i++) {
+      if (codeDataList[i + 1].from == _userAddress) {
+        itemCount += 1;
+      }
+    }
+
+    CodeData[] memory items = new CodeData[](itemCount);
+
+    for (uint i = 0; i < totalNFTCount; i++) {
+      if (codeDataList[i + 1].from == _userAddress) {
+        uint currentId = i + 1;
+        CodeData memory currentNFT = codeDataList[currentId];
+        items[currentIndex] = currentNFT;
+        currentIndex += 1;
+      }
+    }
+
+    return items;   
+  }
 }
