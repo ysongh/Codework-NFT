@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Container, Card, Button } from 'semantic-ui-react';
+import { Container, Card, Statistic, Button, Icon } from 'semantic-ui-react';
 
 import Spinner from '../components/common/Spinner';
 
@@ -47,11 +47,14 @@ function CodeDetail({ walletAddress, codeworkNFTBlockchain }) {
               <Card.Description>
                 <a href={code.url} target="_blank" rel="noopener noreferrer">{code.url}</a>
               </Card.Description>
-              <div style={{marginTop: '.7rem', display: 'flex', alignItems: 'center'}}>
+              <div style={{marginTop: '.7rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                 <Button color='violet' onClick={purchase}>
                   Buy
                 </Button>
-                <p>{code.price / 10 ** 18} ETH</p>
+                <Statistic size='mini'>
+                  <Statistic.Value>{code.price / 10 ** 18} <Icon name='ethereum' /></Statistic.Value>
+                  <Statistic.Label>ETH</Statistic.Label>
+                </Statistic>
               </div>
               {loading && <Spinner text="Minting NFT..." />}
             </Card.Content>
