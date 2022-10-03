@@ -64,13 +64,13 @@ function Navbar({ loadBlockchain, walletAddress, setAccount, myBalance, setCodew
             </Dropdown.Menu>
           </Dropdown>
 
-          <Menu.Item
+          {/* <Menu.Item
             as="a"
             href="https://docs.google.com/forms/d/e/1FAIpQLSekANSgKrBphtgclHiLZFLugK8qqeXFPojraqksycwbeJPEWQ/viewform"
             target="_blank"
             rel="noopener noreferrer"
             name='Feedback'
-          />
+          /> */}
           
         </div>
         {walletAddress ? (

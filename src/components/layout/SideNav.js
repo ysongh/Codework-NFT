@@ -50,14 +50,14 @@ function SideNav({ activeItem, setActiveLink }) {
           Add Code
       </Menu.Item>
 
-      <Menu.Item
+      {/* <Menu.Item
         as="a"
         href="https://docs.google.com/forms/d/e/1FAIpQLSekANSgKrBphtgclHiLZFLugK8qqeXFPojraqksycwbeJPEWQ/viewform"
         target="_blank"
         rel="noopener noreferrer">
           <Icon name='sticky note' />
           Feedback
-      </Menu.Item>
+      </Menu.Item> */}
     </>
   )
 }
