@@ -13,6 +13,7 @@ function CodeDetail({ walletAddress, codeworkNFTBlockchain }) {
   useEffect(() => {
     const loadCode = async () => {
       let data = await codeworkNFTBlockchain.methods.codeDataList(id).call();
+      console.log(data);
       setCode(data);
     }
 
@@ -47,15 +48,17 @@ function CodeDetail({ walletAddress, codeworkNFTBlockchain }) {
               <Card.Description>
                 <a href={code.url} target="_blank" rel="noopener noreferrer">{code.url}</a>
               </Card.Description>
-              <div style={{marginTop: '.7rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-                <Button color='violet' onClick={purchase}>
-                  Buy
-                </Button>
-                <Statistic size='mini'>
-                  <Statistic.Value>{code.price / 10 ** 18} <Icon name='ethereum' /></Statistic.Value>
-                  <Statistic.Label>ETH</Statistic.Label>
-                </Statistic>
-              </div>
+              {code.from !== walletAddress 
+                ? <div style={{marginTop: '.7rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                    <Button color='violet' onClick={purchase}>
+                      Buy
+                    </Button>
+                    <Statistic size='mini'>
+                      <Statistic.Value>{code.price / 10 ** 18} <Icon name='ethereum' /></Statistic.Value>
+                      <Statistic.Label>ETH</Statistic.Label>
+                    </Statistic>
+                  </div>
+                : <h2>You own this Code NFT</h2>}
               {loading && <Spinner text="Minting NFT..." />}
             </Card.Content>
           </Card>
