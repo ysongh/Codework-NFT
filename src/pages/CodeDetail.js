@@ -41,7 +41,13 @@ function CodeDetail({ walletAddress, codeworkNFTBlockchain }) {
         ? <h4 style={{ color: 'red' }}>Connect to your ethereum wallet</h4>
         : <Card color='orange' fluid>
             <Card.Content>
-              <Card.Header>{code.title}</Card.Header>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                <Card.Header>{code.title}</Card.Header>
+                <Card.Meta>
+                  {code.date}
+                </Card.Meta>
+              </div>
+              
               <Card.Meta>
                 {code.description}
               </Card.Meta>
