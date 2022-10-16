@@ -16,7 +16,7 @@ function Home() {
       {showMessage && <Message
         color='teal'
         onDismiss={handleDismiss}
-        header='Contract is deployed on Kovan Test Network'
+        header='Contract is deployed on Goerli Test Network'
       />}
       <Grid style={{ marginTop: '3rem'}} stackable>
         <Grid.Row>

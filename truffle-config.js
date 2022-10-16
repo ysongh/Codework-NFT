@@ -17,6 +17,14 @@ module.exports = {
       timeoutBlocks: 200,
       skipDryRun: true
     },
+    // truffle migrate --network goerli
+    goerli: {
+      provider: () => new HDWalletProvider(mnemonic, `https://eth-goerli.g.alchemy.com/v2/${process.env.ALCHEMY_KEY}`),
+      network_id: 5,
+      confirmations: 2,
+      timeoutBlocks: 200,
+      skipDryRun: true
+    },
     // truffle migrate --network mumbai
     mumbai: {
       provider: () => new HDWalletProvider(mnemonic, `https://rpc-mumbai.maticvigil.com/`),
