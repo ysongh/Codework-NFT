@@ -116,7 +116,7 @@ contract CodeworkNFT is ERC721URIStorage {
     emit Payment(msg.sender, _codeWork.from, _codeWork.workId, _codeId, msg.value);
   }
 
-  function getCodeURLByNFTId(uint _codeId) public view returns (string memory) {
+  function getCodeURLByNFTId(uint _codeId) external view returns (string memory) {
     CodeWork memory _codeWork = codeworkList[_codeId];
     require(_codeWork.viewer == msg.sender, "You do not own this code");
 
@@ -135,7 +135,7 @@ contract CodeworkNFT is ERC721URIStorage {
     emit PurchaseCodeNFT(msg.sender, _codeData.from, _codeId, _codeData.url, msg.value);
   }
 
-  function getAllNFTsOwnByUser(address _userAddress) public view returns (CodeData[] memory) {
+  function getAllNFTsOwnByUser(address _userAddress) external view returns (CodeData[] memory) {
     uint totalNFTCount = _tokenIds.current();
     uint itemCount = 0;
     uint currentIndex = 0;
